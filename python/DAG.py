@@ -1,7 +1,7 @@
 from DAG_TGFF_load import DAG_TGFF
-from DAG_search_critical_path import DAG_SCP
+from DAG_find_critical_path import DAG_FCP
 
-class DAG(DAG_TGFF, DAG_SCP):
+class DAG(DAG_TGFF, DAG_FCP):
     # ＜コンストラクタ＞
     def __init__(self, file_tgff):
         '''

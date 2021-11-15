@@ -1,6 +1,6 @@
 from DAG_base import DAG_base, Node
 
-class DAG_SCP(DAG_base):
+class DAG_FCP(DAG_base):
     # ＜コンストラクタ＞
     def __init__(self, file_tgff):
         '''
@@ -9,10 +9,10 @@ class DAG_SCP(DAG_base):
         nodes[]: ノードの集合
         '''
         self.critical_path=[]
-        super(DAG_SCP, self).__init__(file_tgff)
+        super(DAG_FCP, self).__init__(file_tgff)
 
 
-    def search_critical_path(self):
+    def find_critical_path(self):
         for node in self.nodes:
             if node.src == 1:
                 src = node

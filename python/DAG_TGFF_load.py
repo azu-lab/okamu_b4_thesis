@@ -91,8 +91,8 @@ class DAG_TGFF(DAG_base):
             # エッジを検出し, preとsucを記録
             for end, comm in enumerate(node.comm):
                 if comm != 0:
-                    node.suc.append(end)
-                    nodes[end].pre.append(begin)
+                    node.suc.append(nodes[end])
+                    nodes[end].pre.append(node)
 
         for node in nodes:
             # srcノードを求める

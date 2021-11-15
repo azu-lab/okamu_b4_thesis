@@ -44,4 +44,4 @@ class DAG_base:
     # def read_file_tgff(self): DAG_TGFF_load.pyにて
 
     def check(self):
-        print(self.nodes[2].pre)
+        print([p.idx for p in self.nodes[2].pre])

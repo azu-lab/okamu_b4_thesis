@@ -62,6 +62,7 @@ class DAG_TGFF(DAG_base):
             if(line_list[0] == 'TASK'):
                 node = Node()
                 node.c = type_cost[int(line_list[3])] #line_list[3]がTYPEなので、それに対応する実行時間を格納
+                node.idx = len(nodes)
                 nodes.append(node)
 
         num_of_node = len(nodes)  # タスク数を取得

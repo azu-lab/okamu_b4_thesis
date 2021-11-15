@@ -14,12 +14,16 @@ class Node:
         snk[i]=1 : niはsnkノード. snk[i]=0 : niはsnkノードではない
         """
 
+        self.idx=0
         self.c=0
         self.comm=[]
         self.pre=[]
         self.suc=[]
         self.src=0
         self.snk=0
+
+        # クリティカルパス探索で使用
+        self.wcst=0
 
 
 # DAG
@@ -31,7 +35,7 @@ class DAG_base:
         num_of_node : DAG内のノード数
         nodes[]: ノードの集合
         '''
-        
+        self.nodes = []
         self.file_name = file_tgff
         
 

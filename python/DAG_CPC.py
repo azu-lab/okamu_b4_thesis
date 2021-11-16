@@ -23,6 +23,7 @@ class DAG_CPC(DAG_FCP):
             if idx < len(self.critical_path):
                 cp = self.critical_path[idx]
             else:
+                self.provider.append(tmp)
                 break
             while(len(cp.pre) == 1):
                 tmp.append(cp)
@@ -34,13 +35,22 @@ class DAG_CPC(DAG_FCP):
             self.provider.append(tmp)
 
     def construct_consumer(self):
+        n_cp = self.critical_path
         for theta in self.provider:
-            f_theta = []
-            for f in theta[0].pre:
-                if f.idx not in [cp.idx for cp in self.critical_path]:
-                    f_theta.append(f)
-            
+            # ancesstorを取得
+            f_theta = self.search_ans(theta[0].pre)
+            # クリティカルパスと既にカウントしたものは除外
+            f_theta = [f_t for f_t in f_theta if f_t.idx not in idx_list(n_cp)]
+            n_cp.extend(f_theta)
             self.consumer_f.append(f_theta)
+
+    def search_ans(self, nodes):
+        f_theta = []
+        for node in nodes:
+            f_theta.append(node)
+            f_theta.extend(self.search_ans(node.pre))
+
+        return f_theta
 
     def print_provider(self):
         for theta in self.provider:

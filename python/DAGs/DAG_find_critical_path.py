@@ -1,5 +1,5 @@
-from DAG_base import DAG_base, Node
-from DAG_base import idx_list
+from .DAG_base import DAG_base, Node
+from .DAG_base import idx_list
 
 class DAG_FCP(DAG_base):
     # ＜コンストラクタ＞

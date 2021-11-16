@@ -1,5 +1,5 @@
-from DAG_TGFF_load import DAG_TGFF
-from DAG_CPC import DAG_CPC
+from DAGs.DAG_TGFF_load import DAG_TGFF
+from DAGs.DAG_CPC import DAG_CPC
 
 class DAG(DAG_TGFF, DAG_CPC):
     # ＜コンストラクタ＞

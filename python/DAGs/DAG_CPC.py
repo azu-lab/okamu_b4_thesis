@@ -1,5 +1,5 @@
-from DAG_find_critical_path import DAG_FCP, Node
-from DAG_base import idx_list
+from .DAG_find_critical_path import DAG_FCP, Node
+from .DAG_base import idx_list
 
 class DAG_CPC(DAG_FCP):
     # ＜コンストラクタ＞

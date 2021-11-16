@@ -44,14 +44,6 @@ class DAG_CPC(DAG_FCP):
             n_cp.extend(f_theta)
             self.consumer_f.append(f_theta)
 
-    def search_ans(self, nodes):
-        f_theta = []
-        for node in nodes:
-            f_theta.append(node)
-            f_theta.extend(self.search_ans(node.pre))
-
-        return f_theta
-
     def print_provider(self):
         for theta in self.provider:
             print(idx_list(theta))

@@ -84,19 +84,3 @@ class DAG_TGFF(DAG_base):
                 self.nodes[from_t].comm[to_t] = comm_cost
 
         file_tgff.close()
-
-        for begin, node in enumerate(self.nodes):
-            # エッジを検出し, preとsucを記録
-            for end, comm in enumerate(node.comm):
-                if comm != 0:
-                    node.suc.append(self.nodes[end])
-                    self.nodes[end].pre.append(node)
-
-        for node in self.nodes:
-            # srcノードを求める
-            if(len(node.pre) == 0):
-                    node.src = 1
-
-            # snkノードを求める
-            if(len(node.suc) == 0):
-                    node.snk = 1

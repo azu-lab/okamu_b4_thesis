@@ -43,6 +43,31 @@ class DAG_base:
     # .tgffファイルの読み込み
     # def read_file_tgff(self): DAG_TGFF_load.
 
+    def record_pre_suc(self):
+        for begin, node in enumerate(self.nodes):
+            # エッジを検出し, preとsucを記録
+            for end, comm in enumerate(node.comm):
+                if comm != 0:
+                    node.suc.append(self.nodes[end])
+                    self.nodes[end].pre.append(node)
+
+    def search_src_snk(self):
+        for node in self.nodes:
+            # srcノードを求める
+            if(len(node.pre) == 0):
+                    node.src = 1
+            # snkノードを求める
+            if(len(node.suc) == 0):
+                    node.snk = 1
+
+    def search_ans(self, nodes):
+        f_theta = []
+        for node in nodes:
+            f_theta.append(node)
+            f_theta.extend(self.search_ans(node.pre))
+
+        return f_theta
+
     def check(self):
         print(idx_list(self.nodes[2].pre))
 

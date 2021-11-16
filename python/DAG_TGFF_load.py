@@ -12,7 +12,6 @@ class DAG_TGFF(DAG_base):
         '''
         
         super(DAG_TGFF, self).__init__(file_tgff)
-        self.num_of_node, self.nodes = self.read_file_tgff()
         
 
     # ＜メソッド＞
@@ -50,7 +49,6 @@ class DAG_TGFF(DAG_base):
         file_tgff.close()
         
         # TASKの情報の取得
-        nodes = []
         file_tgff = open(path, "r")
 
         # 実行時間を取得
@@ -62,17 +60,17 @@ class DAG_TGFF(DAG_base):
             if(line_list[0] == 'TASK'):
                 node = Node()
                 node.c = type_cost[int(line_list[3])] #line_list[3]がTYPEなので、それに対応する実行時間を格納
-                node.idx = len(nodes)
-                nodes.append(node)
+                node.idx = len(self.nodes)
+                self.nodes.append(node)
 
-        num_of_node = len(nodes)  # タスク数を取得
+        self.num_of_node = len(self.nodes)  # タスク数を取得
 
         file_tgff.close()
         file_tgff = open(path, "r")
 
         # エッジの通信時間を取得
-        for node in nodes:
-            node.comm = [0] * num_of_node
+        for node in self.nodes:
+            node.comm = [0] * self.num_of_node
 
         for line in file_tgff:
             if(line == "\n"):
@@ -83,18 +81,18 @@ class DAG_TGFF(DAG_base):
                 from_t = int(line_list[3][3:])  # エッジを出すタスク
                 to_t = int(line_list[5][3:])  # エッジの先のタスク
                 comm_cost = int(type_cost[int(line_list[7])])  # TYPEに書かれている時間を通信時間とする
-                nodes[from_t].comm[to_t] = comm_cost
+                self.nodes[from_t].comm[to_t] = comm_cost
 
         file_tgff.close()
 
-        for begin, node in enumerate(nodes):
+        for begin, node in enumerate(self.nodes):
             # エッジを検出し, preとsucを記録
             for end, comm in enumerate(node.comm):
                 if comm != 0:
-                    node.suc.append(nodes[end])
-                    nodes[end].pre.append(node)
+                    node.suc.append(self.nodes[end])
+                    self.nodes[end].pre.append(node)
 
-        for node in nodes:
+        for node in self.nodes:
             # srcノードを求める
             if(len(node.pre) == 0):
                     node.src = 1
@@ -102,5 +100,3 @@ class DAG_TGFF(DAG_base):
             # snkノードを求める
             if(len(node.suc) == 0):
                     node.snk = 1
-        
-        return num_of_node, nodes

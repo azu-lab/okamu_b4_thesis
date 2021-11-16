@@ -1,4 +1,5 @@
 from DAG_base import DAG_base, Node
+from DAG_base import idx_list
 
 class DAG_FCP(DAG_base):
     # ＜コンストラクタ＞
@@ -51,4 +52,4 @@ class DAG_FCP(DAG_base):
 
 
     def print_critical_path(self):
-        print([cp.idx for cp in self.critical_path])
+        print(idx_list(self.critical_path))

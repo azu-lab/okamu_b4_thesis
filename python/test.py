@@ -11,13 +11,15 @@ test_dag.construct_provider()
 test_dag.print_provider()
 print("========")
 test_dag.construct_consumer()
-test_dag.print_consumer()
+test_dag.print_consumer_f()
+print("========")
+test_dag.print_consumer_g()
 
-test = []
-for p in test_dag.provider:
-    test.extend(p)
-for c in test_dag.consumer_f:
-    test.extend(c)
+#test = []
+#for p in test_dag.provider:
+#    test.extend(p)
+#for c in test_dag.consumer_f:
+#    test.extend(c)
 
-print("==========")
-print([t for t in test if t not in test_dag.nodes])
+#print("==========")
+#print([t for t in test if t not in test_dag.nodes])

@@ -61,12 +61,20 @@ class DAG_base:
                     node.snk = 1
 
     def search_ans(self, nodes):
-        f_theta = []
+        ans = []
         for node in nodes:
-            f_theta.append(node)
-            f_theta.extend(self.search_ans(node.pre))
+            ans.append(node)
+            ans.extend(self.search_ans(node.pre))
 
-        return f_theta
+        return ans
+
+    def search_des(self, nodes):
+        des = []
+        for node in nodes:
+            des.append(node)
+            des.extend(self.search_des(node.suc))
+
+        return des
 
     def check(self):
         print(idx_list(self.nodes[2].pre))

@@ -16,14 +16,27 @@ class Node:
 
         self.idx=0
         self.c=0
+        self.n=1
         self.comm=[]
         self.pre=[]
         self.suc=[]
         self.src=0
         self.snk=0
 
+        self.cc_idx=-1
+        self.time=-1
+        self.fn_flag=False
+        self.st_flag=False
+
         # クリティカルパス探索で使用
         self.wcst=0
+
+    def set(self, idx: int, c: int, n: int, pre: [int], snk: bool):
+        self.idx = idx
+        self.c = c
+        self.n = n
+        self.pre = pre
+        self.snk = snk
 
 
 # DAG

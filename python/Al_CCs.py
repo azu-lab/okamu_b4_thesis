@@ -3,15 +3,7 @@ from numpy import argmin
 from math import ceil
 from DAGs.DAG_base import Node
 
-class dag():
-    def __init__(self, c, n):
-        self.c = c
-        self.n = n
-        self.cc_idx = -1
-        self.time = -1
-        self.snk = False
-
-def Al_CCs(dags: [dag]):
+def Al_CCs(dags: [Node], method="Wait-suff"):
     # initialize
     q = []
     e = [ [] for i in range(5) ]
@@ -36,25 +28,24 @@ def Al_CCs(dags: [dag]):
                 vacant_core[cc_idx] -= v_h.n
                 e[cc_idx].append(v_h)
             else:
-                # Wait-suff
-                
-                q.insert(0, v_h)
-                break
-                
-                # Al-avail
-                """
-                cc_idx = argmax(vacant_core)
-                if vacant_core[cc_idx] != 0:
-                    v_h.n = vacant_core[cc_idx]
-                    v_h.cc_idx = cc_idx
-                    v_h.time = time
-                    vacant_core[cc_idx] -= v_h.n
-                    e[cc_idx].append(v_h)
-                else:
+                if method == "Wait-suff":
                     q.insert(0, v_h)
                     break
-                """
+                elif method == "Al-avail":
+                    cc_idx = argmax(vacant_core)
+                    if vacant_core[cc_idx] != 0:
+                        v_h.n = vacant_core[cc_idx]
+                        v_h.cc_idx = cc_idx
+                        v_h.time = time
+                        vacant_core[cc_idx] -= v_h.n
+                        e[cc_idx].append(v_h)
+                    else:
+                        q.insert(0, v_h)
+                        break
                 # Dec-method
+                else:
+                    print("invalid-method")
+                    exit()
                 
 
         # simulation

@@ -2,6 +2,7 @@
 
 
 import pprint
+from math import ceil
 
 class Node:
     def __init__(self):
@@ -20,8 +21,8 @@ class Node:
         self.comm=[]
         self.pre=[]
         self.suc=[]
-        self.src=0
-        self.snk=0
+        self.src=False
+        self.snk=False
 
         self.cc_idx=-1
         self.time=-1
@@ -42,14 +43,13 @@ class Node:
 # DAG
 class DAG_base:
     # ＜コンストラクタ＞
-    def __init__(self, file_tgff):
+    def __init__(self):
         '''
         file_name : .tgffファイルの名前
         num_of_node : DAG内のノード数
         nodes[]: ノードの集合
         '''
         self.nodes = []
-        self.file_name = file_tgff
         
 
     # ＜メソッド＞
@@ -61,17 +61,24 @@ class DAG_base:
             # エッジを検出し, preとsucを記録
             for end, comm in enumerate(node.comm):
                 if comm != 0:
-                    node.suc.append(self.nodes[end])
-                    self.nodes[end].pre.append(node)
+                    node.suc.append(end)
+                    self.nodes[end].pre.append(begin)
 
-    def search_src_snk(self):
+    def record_src_snk(self):
+        snk = []
         for node in self.nodes:
             # srcノードを求める
             if(len(node.pre) == 0):
-                    node.src = 1
+                    node.src = True
             # snkノードを求める
             if(len(node.suc) == 0):
-                    node.snk = 1
+                    node.snk = True
+                    snk.append(node)
+
+        snksnk = snk.pop(-1)
+        for s in snk:
+            s.suc.append(snksnk.idx)
+            snksnk.pre.append(s.idx)
 
     def search_ans(self, nodes):
         ans = []
@@ -88,6 +95,10 @@ class DAG_base:
             des.extend(self.search_des(node.suc))
 
         return des
+
+    def set_n(self, n):
+        for i in range(len(self.nodes)):
+            self.nodes[i].n = n[i]
 
     def check(self):
         print(idx_list(self.nodes[2].pre))

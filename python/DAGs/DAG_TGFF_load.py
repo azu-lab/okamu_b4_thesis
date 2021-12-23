@@ -10,8 +10,9 @@ class DAG_TGFF(DAG_base):
         num_of_node : DAG内のノード数
         nodes[]: ノードの集合
         '''
-        
-        super(DAG_TGFF, self).__init__(file_tgff)
+        self.file_name = file_tgff
+
+        super(DAG_TGFF, self).__init__()
         
 
     # ＜メソッド＞

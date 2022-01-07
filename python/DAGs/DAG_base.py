@@ -18,6 +18,9 @@ class Node:
         self.idx=0
         self.c=0
         self.n=1
+        self.p=0
+        self.k=1.0
+
         self.comm=[]
         self.pre=[]
         self.suc=[]
@@ -25,12 +28,19 @@ class Node:
         self.snk=False
 
         self.cc_idx=-1
+        self.core_idx=[]
         self.time=-1
         self.fn_flag=False
         self.st_flag=False
 
         # クリティカルパス探索で使用
-        self.wcst=0
+        self.wcft=0
+
+    def sc(self):
+        return ceil(((1-self.k)+self.k/self.n)*self.c)
+
+    def sc_n(self, n: int):
+        return ceil(((1-self.k)+self.k/n)*self.c)
 
     def set(self, idx: int, c: int, n: int, pre: [int], snk: bool):
         self.idx = idx
@@ -80,11 +90,11 @@ class DAG_base:
             s.suc.append(snksnk.idx)
             snksnk.pre.append(s.idx)
 
-    def search_ans(self, nodes):
+    def search_ans(self, idx):
         ans = []
-        for node in nodes:
-            ans.append(node)
-            ans.extend(self.search_ans(node.pre))
+        for p in self.nodes[idx].pre:
+            ans.append(p)
+            ans.extend(self.search_ans(p))
 
         return ans
 
@@ -99,6 +109,10 @@ class DAG_base:
     def set_n(self, n):
         for i in range(len(self.nodes)):
             self.nodes[i].n = n[i]
+
+    def set_k(self, k):
+        for i in range(len(self.nodes)):
+            self.nodes[i].k = k[i]
 
     def check(self):
         print(idx_list(self.nodes[2].pre))

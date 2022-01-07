@@ -4,21 +4,19 @@ from .DAG_base import DAG_base, Node
 # DAG
 class DAG_TGFF(DAG_base):
     # ＜コンストラクタ＞
-    def __init__(self, file_tgff):
+    def __init__(self):
         '''
-        file_name : .tgffファイルの名前
         num_of_node : DAG内のノード数
         nodes[]: ノードの集合
         '''
-        self.file_name = file_tgff
 
         super(DAG_TGFF, self).__init__()
         
 
     # ＜メソッド＞
     # .tgffファイルの読み込み
-    def read_file_tgff(self):
-        path = "./DAG/" + self.file_name + ".tgff"  # DAG直下にあることを想定
+    def read_file_tgff(self, file_name):
+        path = "./DAG/" + file_name + ".tgff"  # DAG直下にあることを想定
         file_tgff = open(path, "r")
         
         type_cost = []  # TYPEと実行時間の対応関係の配列

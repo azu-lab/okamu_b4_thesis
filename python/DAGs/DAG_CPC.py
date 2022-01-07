@@ -3,7 +3,7 @@ from .DAG_base import idx_list
 
 class DAG_CPC(DAG_FCP):
     # ＜コンストラクタ＞
-    def __init__(self, file_tgff):
+    def __init__(self):
         '''
         file_name : .tgffファイルの名前
         num_of_node : DAG内のノード数
@@ -12,25 +12,20 @@ class DAG_CPC(DAG_FCP):
         self.provider=[]
         self.consumer_f=[]
         self.consumer_g=[]
-        super(DAG_CPC, self).__init__(file_tgff)
+        super(DAG_CPC, self).__init__()
 
     def construct_provider(self):
         idx = 0
-        cp = self.critical_path[idx]
         while(1):
-            tmp = [cp]
+            tmp = [self.critical_path[idx]]
             idx += 1
-            if idx < len(self.critical_path):
-                cp = self.critical_path[idx]
-            else:
+            if idx >= len(self.critical_path):
                 self.provider.append(tmp)
                 break
-            while(len(cp.pre) == 1):
-                tmp.append(cp)
+            while(len(self.nodes[self.critical_path[idx]].pre) == 1):
+                tmp.append(self.critical_path[idx])
                 idx += 1
-                if idx < len(self.critical_path):
-                    cp = self.critical_path[idx]
-                else:
+                if idx >= len(self.critical_path):
                     break
             self.provider.append(tmp)
 
@@ -54,12 +49,12 @@ class DAG_CPC(DAG_FCP):
 
     def print_provider(self):
         for theta in self.provider:
-            print(idx_list(theta))
+            print(theta)
 
     def print_consumer_f(self):
         for f_theta in self.consumer_f:
-            print(idx_list(f_theta))
+            print(f_theta)
 
     def print_consumer_g(self):
         for g_theta in self.consumer_g:
-            print(idx_list(g_theta))
+            print(g_theta)

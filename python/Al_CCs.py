@@ -54,15 +54,18 @@ def Al_CCs(dags: [Node], method=Method.Wait_suff):
                 elif method is Method.Dec_method:
                     cc_idx = argmax(vacant_core)
                     al_avail_flag = True
-                    core_num = vacant_core[cc_idx]
-                    tmp_time = time + v_h.sc_n(core_num)
+                    if vacant_core[cc_idx] != 0:
+                        core_num = vacant_core[cc_idx]
+                        tmp_time = time + v_h.sc_n(core_num)
 
-                    for node in sorted(e[cc_idx], key=lambda u: u.time+u.sc()):
-                        core_num += node.n
-                        if tmp_time > node.time+node.sc()+v_h.sc_n(core_num):
-                            al_avail_flag = False
-                    
-                    if al_avail_flag is True and vacant_core[cc_idx] != 0:
+                        for node in sorted(e[cc_idx], key=lambda u: u.time+u.sc()):
+                            core_num += node.n
+                            if tmp_time > node.time+node.sc()+v_h.sc_n(core_num):
+                                al_avail_flag = False
+                    else:
+                        al_avail_flag = False
+
+                    if al_avail_flag is True:
                         v_h.n = vacant_core[cc_idx]
                         v_h.cc_idx = cc_idx
                         v_h.time = time

@@ -1,7 +1,7 @@
 from DAG import DAG
 
 test_dag = DAG()
-test_dag.read_file_tgff("original_20_6")
+test_dag.read_file_tgff("./DAG/original_20_6.tgff")
 test_dag.record_pre_suc()
 test_dag.record_src_snk()
 #test_dag.check()

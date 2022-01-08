@@ -15,9 +15,8 @@ class DAG_TGFF(DAG_base):
 
     # ＜メソッド＞
     # .tgffファイルの読み込み
-    def read_file_tgff(self, file_name):
-        path = "./DAG/" + file_name + ".tgff"  # DAG直下にあることを想定
-        file_tgff = open(path, "r")
+    def read_file_tgff(self, file_path):
+        file_tgff = open(file_path, "r")
         
         type_cost = []  # TYPEと実行時間の対応関係の配列
         read_flag = 0  # PE5の情報だけを読み込むためのフラグ
@@ -48,7 +47,7 @@ class DAG_TGFF(DAG_base):
         file_tgff.close()
         
         # TASKの情報の取得
-        file_tgff = open(path, "r")
+        file_tgff = open(file_path, "r")
 
         # 実行時間を取得
         for line in file_tgff:
@@ -65,7 +64,7 @@ class DAG_TGFF(DAG_base):
         self.num_of_node = len(self.nodes)  # タスク数を取得
 
         file_tgff.close()
-        file_tgff = open(path, "r")
+        file_tgff = open(file_path, "r")
 
         # エッジの通信時間を取得
         for node in self.nodes:

@@ -89,6 +89,7 @@ class DAG_base:
         for s in snk:
             s.suc.append(snksnk.idx)
             snksnk.pre.append(s.idx)
+            s.snk=False
 
     def search_ans(self, idx):
         ans = []

@@ -1,0 +1,855 @@
+@TASK_GRAPH 0 {
+	APERIODIC
+
+	TASK t0_0	TYPE 18 
+	TASK t0_1	TYPE 2 
+	TASK t0_2	TYPE 5 
+	TASK t0_3	TYPE 14 
+	TASK t0_4	TYPE 5 
+	TASK t0_5	TYPE 7 
+	TASK t0_6	TYPE 3 
+	TASK t0_7	TYPE 7 
+	TASK t0_8	TYPE 19 
+	TASK t0_9	TYPE 15 
+	TASK t0_10	TYPE 19 
+	TASK t0_11	TYPE 9 
+	TASK t0_12	TYPE 17 
+	TASK t0_13	TYPE 12 
+	TASK t0_14	TYPE 10 
+	TASK t0_15	TYPE 18 
+	TASK t0_16	TYPE 9 
+	TASK t0_17	TYPE 14 
+	TASK t0_18	TYPE 3 
+	TASK t0_19	TYPE 5 
+	TASK t0_20	TYPE 4 
+	TASK t0_21	TYPE 19 
+	TASK t0_22	TYPE 3 
+	TASK t0_23	TYPE 4 
+	TASK t0_24	TYPE 16 
+	TASK t0_25	TYPE 5 
+	TASK t0_26	TYPE 1 
+	TASK t0_27	TYPE 5 
+	TASK t0_28	TYPE 3 
+	TASK t0_29	TYPE 15 
+	TASK t0_30	TYPE 15 
+	TASK t0_31	TYPE 13 
+	TASK t0_32	TYPE 9 
+	TASK t0_33	TYPE 7 
+	TASK t0_34	TYPE 16 
+	TASK t0_35	TYPE 15 
+	TASK t0_36	TYPE 5 
+	TASK t0_37	TYPE 12 
+	TASK t0_38	TYPE 10 
+	TASK t0_39	TYPE 12 
+	TASK t0_40	TYPE 8 
+	TASK t0_41	TYPE 16 
+	TASK t0_42	TYPE 17 
+	TASK t0_43	TYPE 11 
+	TASK t0_44	TYPE 8 
+	TASK t0_45	TYPE 0 
+	TASK t0_46	TYPE 12 
+	TASK t0_47	TYPE 4 
+	TASK t0_48	TYPE 9 
+	TASK t0_49	TYPE 18 
+	TASK t0_50	TYPE 7 
+	TASK t0_51	TYPE 17 
+	TASK t0_52	TYPE 4 
+	TASK t0_53	TYPE 12 
+	TASK t0_54	TYPE 5 
+	TASK t0_55	TYPE 0 
+	TASK t0_56	TYPE 14 
+	TASK t0_57	TYPE 1 
+	TASK t0_58	TYPE 13 
+	TASK t0_59	TYPE 12 
+	TASK t0_60	TYPE 1 
+	TASK t0_61	TYPE 4 
+	TASK t0_62	TYPE 7 
+	TASK t0_63	TYPE 3 
+	TASK t0_64	TYPE 15 
+	TASK t0_65	TYPE 8 
+	TASK t0_66	TYPE 1 
+	TASK t0_67	TYPE 19 
+	TASK t0_68	TYPE 2 
+	TASK t0_69	TYPE 17 
+	TASK t0_70	TYPE 16 
+	TASK t0_71	TYPE 17 
+	TASK t0_72	TYPE 11 
+	TASK t0_73	TYPE 14 
+	TASK t0_74	TYPE 17 
+	TASK t0_75	TYPE 14 
+	TASK t0_76	TYPE 0 
+	TASK t0_77	TYPE 3 
+	TASK t0_78	TYPE 3 
+	TASK t0_79	TYPE 19 
+	TASK t0_80	TYPE 3 
+	TASK t0_81	TYPE 18 
+	TASK t0_82	TYPE 6 
+	TASK t0_83	TYPE 14 
+	TASK t0_84	TYPE 15 
+	TASK t0_85	TYPE 13 
+	TASK t0_86	TYPE 11 
+	TASK t0_87	TYPE 8 
+	TASK t0_88	TYPE 14 
+	TASK t0_89	TYPE 5 
+	TASK t0_90	TYPE 2 
+	TASK t0_91	TYPE 17 
+	TASK t0_92	TYPE 16 
+	TASK t0_93	TYPE 9 
+	TASK t0_94	TYPE 15 
+	TASK t0_95	TYPE 0 
+	TASK t0_96	TYPE 12 
+	TASK t0_97	TYPE 14 
+	TASK t0_98	TYPE 13 
+	TASK t0_99	TYPE 13 
+	TASK t0_100	TYPE 13 
+	TASK t0_101	TYPE 9 
+	TASK t0_102	TYPE 7 
+	TASK t0_103	TYPE 12 
+	TASK t0_104	TYPE 5 
+	TASK t0_105	TYPE 11 
+	TASK t0_106	TYPE 13 
+	TASK t0_107	TYPE 4 
+	TASK t0_108	TYPE 6 
+	TASK t0_109	TYPE 17 
+	TASK t0_110	TYPE 18 
+	TASK t0_111	TYPE 5 
+	TASK t0_112	TYPE 6 
+	TASK t0_113	TYPE 3 
+	TASK t0_114	TYPE 1 
+	TASK t0_115	TYPE 11 
+	TASK t0_116	TYPE 16 
+	TASK t0_117	TYPE 2 
+	TASK t0_118	TYPE 8 
+	TASK t0_119	TYPE 3 
+	TASK t0_120	TYPE 16 
+	TASK t0_121	TYPE 12 
+	TASK t0_122	TYPE 19 
+	TASK t0_123	TYPE 7 
+	TASK t0_124	TYPE 6 
+	TASK t0_125	TYPE 13 
+	TASK t0_126	TYPE 2 
+	TASK t0_127	TYPE 5 
+	TASK t0_128	TYPE 7 
+	TASK t0_129	TYPE 19 
+	TASK t0_130	TYPE 5 
+	TASK t0_131	TYPE 3 
+	TASK t0_132	TYPE 11 
+	TASK t0_133	TYPE 11 
+	TASK t0_134	TYPE 10 
+	TASK t0_135	TYPE 0 
+	TASK t0_136	TYPE 6 
+	TASK t0_137	TYPE 19 
+	TASK t0_138	TYPE 9 
+	TASK t0_139	TYPE 17 
+	TASK t0_140	TYPE 9 
+	TASK t0_141	TYPE 15 
+	TASK t0_142	TYPE 4 
+	TASK t0_143	TYPE 4 
+	TASK t0_144	TYPE 18 
+	TASK t0_145	TYPE 12 
+	TASK t0_146	TYPE 12 
+	TASK t0_147	TYPE 12 
+	TASK t0_148	TYPE 2 
+	TASK t0_149	TYPE 14 
+
+	ARC a0_0 	FROM t0_0  TO  t0_1 TYPE 9
+	ARC a0_1 	FROM t0_1  TO  t0_2 TYPE 1
+	ARC a0_2 	FROM t0_2  TO  t0_3 TYPE 22
+	ARC a0_3 	FROM t0_0  TO  t0_3 TYPE 49
+	ARC a0_4 	FROM t0_3  TO  t0_4 TYPE 0
+	ARC a0_5 	FROM t0_4  TO  t0_5 TYPE 34
+	ARC a0_6 	FROM t0_3  TO  t0_6 TYPE 34
+	ARC a0_7 	FROM t0_0  TO  t0_6 TYPE 34
+	ARC a0_8 	FROM t0_1  TO  t0_7 TYPE 45
+	ARC a0_9 	FROM t0_7  TO  t0_8 TYPE 5
+	ARC a0_10 	FROM t0_2  TO  t0_8 TYPE 9
+	ARC a0_11 	FROM t0_3  TO  t0_9 TYPE 8
+	ARC a0_12 	FROM t0_5  TO  t0_9 TYPE 34
+	ARC a0_13 	FROM t0_6  TO  t0_10 TYPE 21
+	ARC a0_14 	FROM t0_8  TO  t0_10 TYPE 44
+	ARC a0_15 	FROM t0_9  TO  t0_11 TYPE 6
+	ARC a0_16 	FROM t0_9  TO  t0_12 TYPE 16
+	ARC a0_17 	FROM t0_12  TO  t0_13 TYPE 37
+	ARC a0_18 	FROM t0_11  TO  t0_14 TYPE 39
+	ARC a0_19 	FROM t0_11  TO  t0_15 TYPE 33
+	ARC a0_20 	FROM t0_15  TO  t0_16 TYPE 30
+	ARC a0_21 	FROM t0_15  TO  t0_17 TYPE 34
+	ARC a0_22 	FROM t0_15  TO  t0_18 TYPE 31
+	ARC a0_23 	FROM t0_18  TO  t0_19 TYPE 38
+	ARC a0_24 	FROM t0_16  TO  t0_20 TYPE 4
+	ARC a0_25 	FROM t0_18  TO  t0_21 TYPE 5
+	ARC a0_26 	FROM t0_4  TO  t0_21 TYPE 16
+	ARC a0_27 	FROM t0_5  TO  t0_22 TYPE 13
+	ARC a0_28 	FROM t0_11  TO  t0_22 TYPE 40
+	ARC a0_29 	FROM t0_1  TO  t0_22 TYPE 33
+	ARC a0_30 	FROM t0_4  TO  t0_23 TYPE 24
+	ARC a0_31 	FROM t0_2  TO  t0_23 TYPE 25
+	ARC a0_32 	FROM t0_10  TO  t0_23 TYPE 15
+	ARC a0_33 	FROM t0_21  TO  t0_24 TYPE 8
+	ARC a0_34 	FROM t0_12  TO  t0_24 TYPE 32
+	ARC a0_35 	FROM t0_14  TO  t0_25 TYPE 47
+	ARC a0_36 	FROM t0_13  TO  t0_26 TYPE 21
+	ARC a0_37 	FROM t0_13  TO  t0_27 TYPE 35
+	ARC a0_38 	FROM t0_8  TO  t0_28 TYPE 11
+	ARC a0_39 	FROM t0_18  TO  t0_28 TYPE 32
+	ARC a0_40 	FROM t0_6  TO  t0_29 TYPE 37
+	ARC a0_41 	FROM t0_23  TO  t0_30 TYPE 13
+	ARC a0_42 	FROM t0_25  TO  t0_30 TYPE 40
+	ARC a0_43 	FROM t0_26  TO  t0_31 TYPE 40
+	ARC a0_44 	FROM t0_24  TO  t0_32 TYPE 16
+	ARC a0_45 	FROM t0_32  TO  t0_33 TYPE 13
+	ARC a0_46 	FROM t0_32  TO  t0_34 TYPE 48
+	ARC a0_47 	FROM t0_29  TO  t0_35 TYPE 48
+	ARC a0_48 	FROM t0_29  TO  t0_36 TYPE 49
+	ARC a0_49 	FROM t0_29  TO  t0_37 TYPE 6
+	ARC a0_50 	FROM t0_26  TO  t0_38 TYPE 21
+	ARC a0_51 	FROM t0_34  TO  t0_38 TYPE 23
+	ARC a0_52 	FROM t0_21  TO  t0_39 TYPE 19
+	ARC a0_53 	FROM t0_13  TO  t0_39 TYPE 49
+	ARC a0_54 	FROM t0_35  TO  t0_40 TYPE 45
+	ARC a0_55 	FROM t0_35  TO  t0_41 TYPE 25
+	ARC a0_56 	FROM t0_35  TO  t0_42 TYPE 19
+	ARC a0_57 	FROM t0_30  TO  t0_43 TYPE 28
+	ARC a0_58 	FROM t0_30  TO  t0_44 TYPE 18
+	ARC a0_59 	FROM t0_30  TO  t0_45 TYPE 32
+	ARC a0_60 	FROM t0_37  TO  t0_46 TYPE 0
+	ARC a0_61 	FROM t0_37  TO  t0_47 TYPE 41
+	ARC a0_62 	FROM t0_23  TO  t0_48 TYPE 46
+	ARC a0_63 	FROM t0_45  TO  t0_48 TYPE 38
+	ARC a0_64 	FROM t0_19  TO  t0_48 TYPE 28
+	ARC a0_65 	FROM t0_44  TO  t0_49 TYPE 25
+	ARC a0_66 	FROM t0_44  TO  t0_50 TYPE 42
+	ARC a0_67 	FROM t0_47  TO  t0_51 TYPE 24
+	ARC a0_68 	FROM t0_47  TO  t0_52 TYPE 22
+	ARC a0_69 	FROM t0_34  TO  t0_53 TYPE 37
+	ARC a0_70 	FROM t0_8  TO  t0_53 TYPE 17
+	ARC a0_71 	FROM t0_42  TO  t0_54 TYPE 9
+	ARC a0_72 	FROM t0_36  TO  t0_55 TYPE 29
+	ARC a0_73 	FROM t0_36  TO  t0_56 TYPE 19
+	ARC a0_74 	FROM t0_36  TO  t0_57 TYPE 24
+	ARC a0_75 	FROM t0_27  TO  t0_58 TYPE 25
+	ARC a0_76 	FROM t0_27  TO  t0_59 TYPE 27
+	ARC a0_77 	FROM t0_55  TO  t0_60 TYPE 40
+	ARC a0_78 	FROM t0_58  TO  t0_61 TYPE 11
+	ARC a0_79 	FROM t0_58  TO  t0_62 TYPE 19
+	ARC a0_80 	FROM t0_20  TO  t0_63 TYPE 41
+	ARC a0_81 	FROM t0_33  TO  t0_64 TYPE 12
+	ARC a0_82 	FROM t0_5  TO  t0_64 TYPE 2
+	ARC a0_83 	FROM t0_22  TO  t0_65 TYPE 24
+	ARC a0_84 	FROM t0_22  TO  t0_66 TYPE 27
+	ARC a0_85 	FROM t0_50  TO  t0_67 TYPE 30
+	ARC a0_86 	FROM t0_50  TO  t0_68 TYPE 42
+	ARC a0_87 	FROM t0_50  TO  t0_69 TYPE 49
+	ARC a0_88 	FROM t0_39  TO  t0_70 TYPE 6
+	ARC a0_89 	FROM t0_41  TO  t0_71 TYPE 7
+	ARC a0_90 	FROM t0_57  TO  t0_71 TYPE 23
+	ARC a0_91 	FROM t0_48  TO  t0_71 TYPE 41
+	ARC a0_92 	FROM t0_17  TO  t0_72 TYPE 33
+	ARC a0_93 	FROM t0_17  TO  t0_73 TYPE 39
+	ARC a0_94 	FROM t0_53  TO  t0_74 TYPE 20
+	ARC a0_95 	FROM t0_53  TO  t0_75 TYPE 13
+	ARC a0_96 	FROM t0_53  TO  t0_76 TYPE 22
+	ARC a0_97 	FROM t0_64  TO  t0_77 TYPE 30
+	ARC a0_98 	FROM t0_34  TO  t0_78 TYPE 48
+	ARC a0_99 	FROM t0_66  TO  t0_79 TYPE 24
+	ARC a0_100 	FROM t0_63  TO  t0_80 TYPE 42
+	ARC a0_101 	FROM t0_63  TO  t0_81 TYPE 18
+	ARC a0_102 	FROM t0_63  TO  t0_82 TYPE 9
+	ARC a0_103 	FROM t0_51  TO  t0_83 TYPE 3
+	ARC a0_104 	FROM t0_51  TO  t0_84 TYPE 33
+	ARC a0_105 	FROM t0_33  TO  t0_85 TYPE 48
+	ARC a0_106 	FROM t0_44  TO  t0_85 TYPE 40
+	ARC a0_107 	FROM t0_57  TO  t0_86 TYPE 12
+	ARC a0_108 	FROM t0_47  TO  t0_86 TYPE 33
+	ARC a0_109 	FROM t0_40  TO  t0_87 TYPE 29
+	ARC a0_110 	FROM t0_37  TO  t0_87 TYPE 27
+	ARC a0_111 	FROM t0_59  TO  t0_88 TYPE 1
+	ARC a0_112 	FROM t0_58  TO  t0_88 TYPE 28
+	ARC a0_113 	FROM t0_17  TO  t0_88 TYPE 38
+	ARC a0_114 	FROM t0_55  TO  t0_89 TYPE 12
+	ARC a0_115 	FROM t0_27  TO  t0_89 TYPE 46
+	ARC a0_116 	FROM t0_42  TO  t0_89 TYPE 41
+	ARC a0_117 	FROM t0_12  TO  t0_90 TYPE 8
+	ARC a0_118 	FROM t0_19  TO  t0_90 TYPE 32
+	ARC a0_119 	FROM t0_72  TO  t0_91 TYPE 40
+	ARC a0_120 	FROM t0_77  TO  t0_92 TYPE 13
+	ARC a0_121 	FROM t0_78  TO  t0_92 TYPE 45
+	ARC a0_122 	FROM t0_73  TO  t0_93 TYPE 18
+	ARC a0_123 	FROM t0_92  TO  t0_93 TYPE 35
+	ARC a0_124 	FROM t0_76  TO  t0_94 TYPE 36
+	ARC a0_125 	FROM t0_76  TO  t0_95 TYPE 45
+	ARC a0_126 	FROM t0_76  TO  t0_96 TYPE 5
+	ARC a0_127 	FROM t0_87  TO  t0_97 TYPE 37
+	ARC a0_128 	FROM t0_87  TO  t0_98 TYPE 18
+	ARC a0_129 	FROM t0_97  TO  t0_99 TYPE 21
+	ARC a0_130 	FROM t0_86  TO  t0_100 TYPE 30
+	ARC a0_131 	FROM t0_82  TO  t0_100 TYPE 8
+	ARC a0_132 	FROM t0_49  TO  t0_101 TYPE 20
+	ARC a0_133 	FROM t0_49  TO  t0_102 TYPE 49
+	ARC a0_134 	FROM t0_49  TO  t0_103 TYPE 10
+	ARC a0_135 	FROM t0_62  TO  t0_104 TYPE 18
+	ARC a0_136 	FROM t0_62  TO  t0_105 TYPE 18
+	ARC a0_137 	FROM t0_62  TO  t0_106 TYPE 16
+	ARC a0_138 	FROM t0_51  TO  t0_107 TYPE 0
+	ARC a0_139 	FROM t0_96  TO  t0_108 TYPE 7
+	ARC a0_140 	FROM t0_96  TO  t0_109 TYPE 7
+	ARC a0_141 	FROM t0_96  TO  t0_110 TYPE 35
+	ARC a0_142 	FROM t0_107  TO  t0_111 TYPE 10
+	ARC a0_143 	FROM t0_107  TO  t0_112 TYPE 19
+	ARC a0_144 	FROM t0_78  TO  t0_113 TYPE 18
+	ARC a0_145 	FROM t0_90  TO  t0_114 TYPE 14
+	ARC a0_146 	FROM t0_78  TO  t0_115 TYPE 34
+	ARC a0_147 	FROM t0_86  TO  t0_115 TYPE 48
+	ARC a0_148 	FROM t0_105  TO  t0_116 TYPE 39
+	ARC a0_149 	FROM t0_115  TO  t0_117 TYPE 13
+	ARC a0_150 	FROM t0_115  TO  t0_118 TYPE 49
+	ARC a0_151 	FROM t0_115  TO  t0_119 TYPE 44
+	ARC a0_152 	FROM t0_94  TO  t0_120 TYPE 39
+	ARC a0_153 	FROM t0_75  TO  t0_120 TYPE 33
+	ARC a0_154 	FROM t0_71  TO  t0_121 TYPE 32
+	ARC a0_155 	FROM t0_43  TO  t0_121 TYPE 22
+	ARC a0_156 	FROM t0_9  TO  t0_122 TYPE 42
+	ARC a0_157 	FROM t0_31  TO  t0_123 TYPE 31
+	ARC a0_158 	FROM t0_123  TO  t0_124 TYPE 37
+	ARC a0_159 	FROM t0_123  TO  t0_125 TYPE 4
+	ARC a0_160 	FROM t0_123  TO  t0_126 TYPE 37
+	ARC a0_161 	FROM t0_7  TO  t0_127 TYPE 19
+	ARC a0_162 	FROM t0_109  TO  t0_128 TYPE 35
+	ARC a0_163 	FROM t0_109  TO  t0_129 TYPE 17
+	ARC a0_164 	FROM t0_109  TO  t0_130 TYPE 43
+	ARC a0_165 	FROM t0_95  TO  t0_131 TYPE 2
+	ARC a0_166 	FROM t0_131  TO  t0_132 TYPE 12
+	ARC a0_167 	FROM t0_73  TO  t0_133 TYPE 3
+	ARC a0_168 	FROM t0_25  TO  t0_133 TYPE 10
+	ARC a0_169 	FROM t0_48  TO  t0_133 TYPE 2
+	ARC a0_170 	FROM t0_38  TO  t0_134 TYPE 18
+	ARC a0_171 	FROM t0_38  TO  t0_135 TYPE 11
+	ARC a0_172 	FROM t0_132  TO  t0_136 TYPE 28
+	ARC a0_173 	FROM t0_114  TO  t0_137 TYPE 3
+	ARC a0_174 	FROM t0_79  TO  t0_138 TYPE 10
+	ARC a0_175 	FROM t0_79  TO  t0_139 TYPE 30
+	ARC a0_176 	FROM t0_98  TO  t0_140 TYPE 0
+	ARC a0_177 	FROM t0_98  TO  t0_141 TYPE 47
+	ARC a0_178 	FROM t0_98  TO  t0_142 TYPE 44
+	ARC a0_179 	FROM t0_108  TO  t0_143 TYPE 37
+	ARC a0_180 	FROM t0_113  TO  t0_143 TYPE 19
+	ARC a0_181 	FROM t0_88  TO  t0_144 TYPE 3
+	ARC a0_182 	FROM t0_57  TO  t0_144 TYPE 5
+	ARC a0_183 	FROM t0_39  TO  t0_144 TYPE 3
+	ARC a0_184 	FROM t0_38  TO  t0_145 TYPE 38
+	ARC a0_185 	FROM t0_121  TO  t0_146 TYPE 23
+	ARC a0_186 	FROM t0_121  TO  t0_147 TYPE 3
+	ARC a0_187 	FROM t0_90  TO  t0_148 TYPE 42
+	ARC a0_188 	FROM t0_75  TO  t0_148 TYPE 44
+	ARC a0_189 	FROM t0_119  TO  t0_148 TYPE 39
+	ARC a0_190 	FROM t0_132  TO  t0_149 TYPE 28
+	ARC a0_191 	FROM t0_108  TO  t0_149 TYPE 26
+
+	HARD_DEADLINE d0_0 ON t0_28 AT 1100
+	HARD_DEADLINE d0_1 ON t0_46 AT 800
+	HARD_DEADLINE d0_2 ON t0_52 AT 900
+	HARD_DEADLINE d0_3 ON t0_54 AT 900
+	HARD_DEADLINE d0_4 ON t0_56 AT 800
+	HARD_DEADLINE d0_5 ON t0_60 AT 900
+	HARD_DEADLINE d0_6 ON t0_61 AT 1200
+	HARD_DEADLINE d0_7 ON t0_65 AT 1000
+	HARD_DEADLINE d0_8 ON t0_67 AT 1400
+	HARD_DEADLINE d0_9 ON t0_68 AT 1400
+	HARD_DEADLINE d0_10 ON t0_69 AT 1400
+	HARD_DEADLINE d0_11 ON t0_70 AT 1300
+	HARD_DEADLINE d0_12 ON t0_74 AT 1600
+	HARD_DEADLINE d0_13 ON t0_80 AT 1300
+	HARD_DEADLINE d0_14 ON t0_81 AT 1300
+	HARD_DEADLINE d0_15 ON t0_83 AT 1000
+	HARD_DEADLINE d0_16 ON t0_84 AT 1000
+	HARD_DEADLINE d0_17 ON t0_85 AT 1500
+	HARD_DEADLINE d0_18 ON t0_89 AT 1100
+	HARD_DEADLINE d0_19 ON t0_91 AT 1200
+	HARD_DEADLINE d0_20 ON t0_93 AT 1800
+	HARD_DEADLINE d0_21 ON t0_99 AT 1100
+	HARD_DEADLINE d0_22 ON t0_100 AT 1400
+	HARD_DEADLINE d0_23 ON t0_101 AT 1400
+	HARD_DEADLINE d0_24 ON t0_102 AT 1400
+	HARD_DEADLINE d0_25 ON t0_103 AT 1400
+	HARD_DEADLINE d0_26 ON t0_104 AT 1300
+	HARD_DEADLINE d0_27 ON t0_106 AT 1300
+	HARD_DEADLINE d0_28 ON t0_110 AT 1800
+	HARD_DEADLINE d0_29 ON t0_111 AT 1100
+	HARD_DEADLINE d0_30 ON t0_112 AT 1100
+	HARD_DEADLINE d0_31 ON t0_116 AT 1400
+	HARD_DEADLINE d0_32 ON t0_117 AT 1700
+	HARD_DEADLINE d0_33 ON t0_118 AT 1700
+	HARD_DEADLINE d0_34 ON t0_120 AT 1800
+	HARD_DEADLINE d0_35 ON t0_122 AT 800
+	HARD_DEADLINE d0_36 ON t0_124 AT 1300
+	HARD_DEADLINE d0_37 ON t0_125 AT 1300
+	HARD_DEADLINE d0_38 ON t0_126 AT 1300
+	HARD_DEADLINE d0_39 ON t0_127 AT 400
+	HARD_DEADLINE d0_40 ON t0_128 AT 1900
+	HARD_DEADLINE d0_41 ON t0_129 AT 1900
+	HARD_DEADLINE d0_42 ON t0_130 AT 1900
+	HARD_DEADLINE d0_43 ON t0_133 AT 1400
+	HARD_DEADLINE d0_44 ON t0_134 AT 1600
+	HARD_DEADLINE d0_45 ON t0_135 AT 1600
+	HARD_DEADLINE d0_46 ON t0_136 AT 2000
+	HARD_DEADLINE d0_47 ON t0_137 AT 1400
+	HARD_DEADLINE d0_48 ON t0_138 AT 1200
+	HARD_DEADLINE d0_49 ON t0_139 AT 1200
+	HARD_DEADLINE d0_50 ON t0_140 AT 1100
+	HARD_DEADLINE d0_51 ON t0_141 AT 1100
+	HARD_DEADLINE d0_52 ON t0_142 AT 1100
+	HARD_DEADLINE d0_53 ON t0_143 AT 1900
+	HARD_DEADLINE d0_54 ON t0_144 AT 1300
+	HARD_DEADLINE d0_55 ON t0_145 AT 1600
+	HARD_DEADLINE d0_56 ON t0_146 AT 1600
+	HARD_DEADLINE d0_57 ON t0_147 AT 1600
+	HARD_DEADLINE d0_58 ON t0_148 AT 1800
+	HARD_DEADLINE d0_59 ON t0_149 AT 2000
+}
+
+
+
+
+@PE 0 {
+# price
+  13.2943
+
+#------------------------------------------------------------------------------
+# type version exec_time
+  0    0       81.4216
+  1    0       109.02
+  2    0       125.152
+  3    0       68.4411
+  4    0       67.6243
+  5    0       128.987
+  6    0       73.6115
+  7    0       106.471
+  8    0       117.004
+  9    0       123.089
+  10   0       74.8155
+  11   0       101.478
+  12   0       103.171
+  13   0       126.074
+  14   0       114.428
+  15   0       106.826
+  16   0       93.2478
+  17   0       138.878
+  18   0       102.319
+  19   0       85.3021
+}
+
+
+@PE 1 {
+# price
+  6.30821
+
+#------------------------------------------------------------------------------
+# type version exec_time
+  0    0       64.0604
+  1    0       94.1468
+  2    0       124.676
+  3    0       73.0025
+  4    0       99.1736
+  5    0       104.647
+  6    0       82.3354
+  7    0       105.816
+  8    0       73.5523
+  9    0       96.2632
+  10   0       77.0586
+  11   0       72.5606
+  12   0       84.175
+  13   0       77.1849
+  14   0       116.365
+  15   0       113.946
+  16   0       85.4373
+  17   0       81.8251
+  18   0       70.4964
+  19   0       91.4139
+}
+
+
+@PE 2 {
+# price
+  14.9922
+
+#------------------------------------------------------------------------------
+# type version exec_time
+  0    0       88.7393
+  1    0       99.7023
+  2    0       119.212
+  3    0       76.9943
+  4    0       111.913
+  5    0       103.362
+  6    0       90.361
+  7    0       99.1684
+  8    0       113.731
+  9    0       135.587
+  10   0       77.5553
+  11   0       119.634
+  12   0       139.744
+  13   0       130.469
+  14   0       138.393
+  15   0       138.707
+  16   0       123.893
+  17   0       129.227
+  18   0       125.249
+  19   0       133.111
+}
+
+
+@PE 3 {
+# price
+  9.03717
+
+#------------------------------------------------------------------------------
+# type version exec_time
+  0    0       114.188
+  1    0       118.827
+  2    0       103.984
+  3    0       66.3084
+  4    0       62.5011
+  5    0       113.966
+  6    0       106.144
+  7    0       101.491
+  8    0       89.3881
+  9    0       75.1962
+  10   0       88.4483
+  11   0       77.9139
+  12   0       89.9242
+  13   0       103.574
+  14   0       120.617
+  15   0       88.3041
+  16   0       86.898
+  17   0       124.698
+  18   0       122.821
+  19   0       119.985
+}
+
+
+@PE 4 {
+# price
+  6.8981
+
+#------------------------------------------------------------------------------
+# type version exec_time
+  0    0       67.0208
+  1    0       80.4802
+  2    0       112.53
+  3    0       98.2634
+  4    0       99.8065
+  5    0       130.621
+  6    0       76.524
+  7    0       101.606
+  8    0       88.2172
+  9    0       92.4888
+  10   0       62.4426
+  11   0       70.4779
+  12   0       95.0119
+  13   0       73.026
+  14   0       96.7038
+  15   0       70.5069
+  16   0       98.3108
+  17   0       120.065
+  18   0       62.4317
+  19   0       85.6837
+}
+
+
+
+@PE 5 {
+#  price      
+   9.11854    
+
+#------------------------------------------------------------------------------
+# type  exec_time  
+  0     105.855    
+  1     109.573    
+  2     138.821    
+  3     82.9762    
+  4     71.2808    
+  5     96.1712    
+  6     94.3794    
+  7     131.444    
+  8     117.167    
+  9     132.105    
+  10    74.3234    
+  11    90.2188    
+  12    118.159    
+  13    79.5925    
+  14    122.722    
+  15    113.878    
+  16    93.8675    
+  17    112.778    
+  18    95.5953    
+  19    123.577    
+  20    136.804    
+  21    100.222    
+  22    97.7581    
+  23    88.6416    
+  24    120.366    
+  25    70.9164    
+  26    68.2157    
+  27    71.5476    
+  28    79.6723    
+  29    113.728    
+  30    78.4824    
+  31    105.833    
+  32    64.8941    
+  33    72.5962    
+  34    109.779    
+  35    83.0716    
+  36    129.304    
+  37    128.068    
+  38    108.2      
+  39    126.645    
+  40    124.262    
+  41    130.462    
+  42    108.429    
+  43    120.799    
+  44    132.898    
+  45    136.145    
+  46    122.222    
+  47    103.576    
+  48    106.598    
+  49    83.1438    
+}
+
+
+@PE 6 {
+#  price      
+   5.82509    
+
+#------------------------------------------------------------------------------
+# type  exec_time  
+  0     77.5717    
+  1     115.772    
+  2     99.7753    
+  3     64.8023    
+  4     62.3814    
+  5     127.318    
+  6     77.7215    
+  7     87.9129    
+  8     109.39     
+  9     106.779    
+  10    69.9704    
+  11    75.7738    
+  12    107.194    
+  13    117.694    
+  14    123.573    
+  15    73.2005    
+  16    80.1303    
+  17    124.313    
+  18    115.831    
+  19    116.217    
+  20    131.348    
+  21    82.225     
+  22    124.395    
+  23    88.6334    
+  24    105.359    
+  25    68.2572    
+  26    74.602     
+  27    78.9612    
+  28    82.6392    
+  29    100.167    
+  30    78.2695    
+  31    128.608    
+  32    92.1372    
+  33    61.788     
+  34    85.0679    
+  35    88.712     
+  36    117.019    
+  37    69.6113    
+  38    61.6795    
+  39    116.521    
+  40    61.8876    
+  41    97.0153    
+  42    103.083    
+  43    76.1616    
+  44    113.723    
+  45    95.7462    
+  46    99.6689    
+  47    77.3196    
+  48    131.684    
+  49    86.4734    
+}
+
+
+@PE 7 {
+#  price      
+   14.789     
+
+#------------------------------------------------------------------------------
+# type  exec_time  
+  0     118.153    
+  1     91.4438    
+  2     124.953    
+  3     103.409    
+  4     117.797    
+  5     115.58     
+  6     81.3134    
+  7     139.881    
+  8     128.547    
+  9     99.6241    
+  10    122.57     
+  11    125.863    
+  12    113.025    
+  13    133.285    
+  14    113.149    
+  15    128.324    
+  16    94.5147    
+  17    139.991    
+  18    125.151    
+  19    116.476    
+  20    139.136    
+  21    91.1425    
+  22    109.98     
+  23    117.016    
+  24    126.934    
+  25    103.614    
+  26    129.625    
+  27    116.185    
+  28    129.971    
+  29    137.041    
+  30    134.004    
+  31    125.682    
+  32    132.651    
+  33    131.044    
+  34    114.7      
+  35    128.368    
+  36    123.729    
+  37    127.671    
+  38    135.681    
+  39    104.13     
+  40    84.4817    
+  41    114.372    
+  42    123.655    
+  43    126.911    
+  44    123.289    
+  45    121.689    
+  46    118.912    
+  47    126.192    
+  48    132.669    
+  49    117.948    
+}
+
+
+@PE 8 {
+#  price      
+   8.16278    
+
+#------------------------------------------------------------------------------
+# type  exec_time  
+  0     83.5426    
+  1     69.2226    
+  2     121.067    
+  3     66.6517    
+  4     66.3086    
+  5     112.555    
+  6     61.9276    
+  7     83.1731    
+  8     128.382    
+  9     94.4642    
+  10    72.2308    
+  11    63.3976    
+  12    132.836    
+  13    86.5294    
+  14    76.3804    
+  15    119.965    
+  16    87.2093    
+  17    114.86     
+  18    116.461    
+  19    72.1715    
+  20    90.5946    
+  21    95.9872    
+  22    133.656    
+  23    104.925    
+  24    107.232    
+  25    76.2926    
+  26    67.2361    
+  27    61.4874    
+  28    89.1806    
+  29    82.6148    
+  30    120.494    
+  31    93.519     
+  32    67.4989    
+  33    69.546     
+  34    86.1647    
+  35    120.951    
+  36    119.128    
+  37    116.901    
+  38    96.7676    
+  39    80.9718    
+  40    73.402     
+  41    100.603    
+  42    115.231    
+  43    88.1778    
+  44    128.703    
+  45    123.017    
+  46    66.9702    
+  47    118.918    
+  48    136.102    
+  49    108.827    
+}
+
+
+@PE 9 {
+#  price      
+   6.62158    
+
+#------------------------------------------------------------------------------
+# type  exec_time  
+  0     73.6169    
+  1     67.4309    
+  2     108.975    
+  3     92.7794    
+  4     74.9459    
+  5     97.9331    
+  6     74.2461    
+  7     94.6508    
+  8     71.833     
+  9     87.4821    
+  10    60.1599    
+  11    68.5272    
+  12    103.991    
+  13    77.208     
+  14    117.122    
+  15    79.7986    
+  16    60.2708    
+  17    117.888    
+  18    92.0222    
+  19    75.8733    
+  20    102.011    
+  21    60.7047    
+  22    98.0736    
+  23    66.8758    
+  24    92.5801    
+  25    62.9612    
+  26    64.0996    
+  27    60.4896    
+  28    76.8086    
+  29    62.3363    
+  30    110.024    
+  31    84.9574    
+  32    66.91      
+  33    60.2984    
+  34    65.612     
+  35    105.995    
+  36    69.3048    
+  37    83.7802    
+  38    87.3452    
+  39    63.3206    
+  40    81.0431    
+  41    80.2324    
+  42    106.849    
+  43    98.0654    
+  44    67.8767    
+  45    93.6909    
+  46    62.0822    
+  47    86.7926    
+  48    92.0285    
+  49    95.6525    
+}
+
+
+
+ 

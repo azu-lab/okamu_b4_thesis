@@ -32,6 +32,7 @@ dag.find_critical_path()
 #dag.print_critical_path()
 
 dag.rta_fcp(65536)
+#dag.checksum()
 
 """
 nodes = []
@@ -70,7 +71,8 @@ elif len(argv) > 2 and "Dec-method" in argv[2]:
 else:
     Al_CCs(dag.nodes, Method.Al_avail)
 
-JSONexport(dag)
+#JSONexport(dag)
+
 p=[]
 #for node in dag.nodes:
 #    print("idx: "+str(node.idx).ljust(2)+", CC: "+str(node.cc_idx)+", c: "+str(len(node.core_idx)).ljust(3)+", time: "+str(node.time))

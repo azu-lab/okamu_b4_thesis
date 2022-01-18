@@ -42,10 +42,11 @@ class Node:
     def sc_n(self, n: int):
         return ceil(((1-self.k)+self.k/n)*self.c)
 
-    def set(self, idx: int, c: int, n: int):
+    def set(self, idx: int, c: int, n: int, k: float):
         self.idx = idx
         self.c = c
         self.n = n
+        self.k = k
 
 
 # DAG
@@ -75,13 +76,14 @@ class DAG_base:
     def record_src_snk(self):
         snk = []
         for node in self.nodes:
-            # srcノードを求める
-            if(len(node.pre) == 0):
-                    node.src = True
-            # snkノードを求める
-            if(len(node.suc) == 0):
-                    node.snk = True
-                    snk.append(node)
+            if node is not None:
+                # srcノードを求める
+                if(len(node.pre) == 0):
+                        node.src = True
+                # snkノードを求める
+                if(len(node.suc) == 0):
+                        node.snk = True
+                        snk.append(node)
 
         snksnk = snk.pop(-1)
         for s in snk:

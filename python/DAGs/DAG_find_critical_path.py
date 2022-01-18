@@ -15,11 +15,12 @@ class DAG_FCP(DAG_base):
     # クリティカルパスの特定
     def find_critical_path(self):
         # ソースとシンクの特定（DAGなら戦闘と末尾でも可）
-        for i in range(len(self.nodes)):
-            if self.nodes[i].src == 1:
-                src = i
-            if self.nodes[i].snk == 1:
-                snk = i
+        for n in self.nodes:
+            if n is not None:
+                if n.src == 1:
+                    src = n.idx
+                if n.snk == 1:
+                    snk = n.idx
 
         # 最悪ケースの開始時間の設定
         self.culc_wcft(src, 0)
@@ -48,7 +49,8 @@ class DAG_FCP(DAG_base):
             self.nodes[i].wcft = start_time + self.nodes[i].sc()
             # 自分の後ろも更新する
             for s in self.nodes[i].suc:
-                self.culc_wcft(s, start_time + self.nodes[s].sc())
+                if s is not None:
+                    self.culc_wcft(s, start_time + self.nodes[s].sc())
 
 
     def print_critical_path(self):

@@ -12,8 +12,8 @@ class DAG(DAG_TGFF, DAG_CPC):
 
         super(DAG, self).__init__()
 
-    def rta_fcp(self):
-        priority = 65536
+    def rta_fcp(self, p):
+        priority = p
         for cp in self.critical_path:
             self.nodes[cp].p=priority
             priority-=1

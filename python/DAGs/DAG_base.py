@@ -42,12 +42,10 @@ class Node:
     def sc_n(self, n: int):
         return ceil(((1-self.k)+self.k/n)*self.c)
 
-    def set(self, idx: int, c: int, n: int, pre: [int], snk: bool):
+    def set(self, idx: int, c: int, n: int):
         self.idx = idx
         self.c = c
         self.n = n
-        self.pre = pre
-        self.snk = snk
 
 
 # DAG

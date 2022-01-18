@@ -47,6 +47,8 @@ def Al_CCs(dags: [Node], method=Method.Wait_suff):
                         v_h.cc_idx = cc_idx
                         v_h.time = time
                         vacant_core[cc_idx] -= v_h.n
+                        for i in range(v_h.n):
+                            v_h.core_idx.append(cores[cc_idx].pop(0))
                         e[cc_idx].append(v_h)
                     else:
                         q.insert(0, v_h)
@@ -70,6 +72,8 @@ def Al_CCs(dags: [Node], method=Method.Wait_suff):
                         v_h.cc_idx = cc_idx
                         v_h.time = time
                         vacant_core[cc_idx] -= v_h.n
+                        for i in range(v_h.n):
+                            v_h.core_idx.append(cores[cc_idx].pop(0))
                         e[cc_idx].append(v_h)
                     else:
                         q.insert(0, v_h)

@@ -8,11 +8,12 @@ class Method(Enum):
     Wait_suff = 0
     Al_avail = 1
     Dec_method = 2
+    Basic = 3
 
 def Al_CCs(dags: [Node], method=Method.Wait_suff):
     # initialize
     q = []
-    e = [ [] for i in range(5) ]
+    e = []
     vacant_core = [ 16 for i in range(5) ]
     cores = [ [ i for i in range(16) ] for i in range(5) ]
 
@@ -28,16 +29,19 @@ def Al_CCs(dags: [Node], method=Method.Wait_suff):
         while len(q) > 0:
             v_h = q.pop(0)
             #print([99 if i < v_h.n else i for i in vacant_core])
-            cc_idx = argmin([99 if i < v_h.n else i for i in vacant_core])
+            if method is not Method.Basic:
+                cc_idx = argmin([99 if core_num < v_h.n else core_num for core_num in vacant_core])
+            else:
+                cc_idx = argmin([99 if core_num != 16 else core_num for core_num in vacant_core])
             if vacant_core[cc_idx] >= v_h.n:
                 v_h.cc_idx = cc_idx
                 v_h.time = time
                 vacant_core[cc_idx] -= v_h.n
                 for i in range(v_h.n):
                     v_h.core_idx.append(cores[cc_idx].pop(0))
-                e[cc_idx].append(v_h)
+                e.append(v_h)
             else:
-                if method is Method.Wait_suff:
+                if method is Method.Wait_suff or method is Method.Basic:
                     q.insert(0, v_h)
                     break
                 elif method is Method.Al_avail:
@@ -49,7 +53,7 @@ def Al_CCs(dags: [Node], method=Method.Wait_suff):
                         vacant_core[cc_idx] -= v_h.n
                         for i in range(v_h.n):
                             v_h.core_idx.append(cores[cc_idx].pop(0))
-                        e[cc_idx].append(v_h)
+                        e.append(v_h)
                     else:
                         q.insert(0, v_h)
                         break
@@ -60,7 +64,7 @@ def Al_CCs(dags: [Node], method=Method.Wait_suff):
                         core_num = vacant_core[cc_idx]
                         tmp_time = time + v_h.sc_n(core_num)
 
-                        for node in sorted(e[cc_idx], key=lambda u: u.time+u.sc()):
+                        for node in sorted([node for node in e if node.cc_idx == cc_idx], key=lambda u: u.time+u.sc()):
                             core_num += node.n
                             if tmp_time > node.time+node.sc()+v_h.sc_n(core_num):
                                 al_avail_flag = False
@@ -74,7 +78,7 @@ def Al_CCs(dags: [Node], method=Method.Wait_suff):
                         vacant_core[cc_idx] -= v_h.n
                         for i in range(v_h.n):
                             v_h.core_idx.append(cores[cc_idx].pop(0))
-                        e[cc_idx].append(v_h)
+                        e.append(v_h)
                     else:
                         q.insert(0, v_h)
                         break
@@ -86,21 +90,19 @@ def Al_CCs(dags: [Node], method=Method.Wait_suff):
 
         # simulation
         # find earliest
-        finish_time = 99999
-        idx = (-1, -1)
-        for i, ear in enumerate(e):
-            for j, node in enumerate(ear):
-                if node.time + node.sc() < finish_time:
-                    finish_time = node.time + node.sc()
-                    idx = (i, j)
-        earliest = e[idx[0]].pop(idx[1])
+        e = sorted(e, key=lambda node: node.time+node.sc())
+        while(len(e) != 0):
+            earliest = e.pop(0)
 
+            vacant_core[earliest.cc_idx] += earliest.n
+            cores[earliest.cc_idx].extend(earliest.core_idx)
+            time = earliest.time + earliest.sc()
+            earliest.fn_flag = True
+
+            if len(e) == 0 or e[0].time + e[0].sc() != time:
+                break
         if earliest.snk is True:
             break
-        vacant_core[idx[0]] += earliest.n
-        cores[idx[0]].extend(earliest.core_idx)
-        time = earliest.time + earliest.sc()
-        earliest.fn_flag = True
 
         new_entry = []
         for dag in dags:

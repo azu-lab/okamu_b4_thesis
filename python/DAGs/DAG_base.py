@@ -7,12 +7,13 @@ from math import ceil
 class Node:
     def __init__(self):
         """
-        c : niの実行時間
-        comm[j] : ni~nj間の通信時間
-        pre[i] : niの前任ノードのリスト
-        suc[i] : niの後続ノードのリスト
-        src[i]=1 : niはsrcノード. src[i]=0 : niはsrcノードではない
-        snk[i]=1 : niはsnkノード. snk[i]=0 : niはsnkノードではない
+        p:   優先度
+        pre: 前任タスクの配列番目
+        suc: 後任タスクの配列番目
+
+        cc_idx:     割り当てクラスタ番目
+        core_idx:   割り当てコア番目（クラスタ内）
+        start_time: 開始時刻
         """
 
         self.idx: int = 0
@@ -21,7 +22,6 @@ class Node:
         self.p: int = 0
         self.k: float = 1.0
 
-        self.comm: list[int] = []
         self.pre: list[int] = []
         self.suc: list[int] = []
         self.src: bool = False
@@ -29,20 +29,33 @@ class Node:
 
         self.cc_idx: int = -1
         self.core_idx: list[int] = []
-        self.time: int = -1
+        self.start_time: int = -1
         self.fn_flag: bool = False
         self.st_flag: bool = False
 
-        # クリティカルパス探索で使用
-        self.wcft: int = 0
+        self.wcft: int = 0 # クリティカルパス探索・優先度決定で使用
 
-    def sc(self) -> int:
+    def amdahl_exec_time(self) -> int:
+        """
+        アムダールの法則による実行時間
+        現在割り当てられたコア数・並列度に基づく
+        """
         return ceil(((1-self.k)+self.k/self.n)*self.c)
 
-    def sc_n(self, n: int) -> int:
+    def amdahl_exe_time_with_n_core(self, n: int) -> int:
+        """
+        アムダールの法則による実行時間
+        引数のコア数・並列度に基づく
+        """
         return ceil(((1-self.k)+self.k/n)*self.c)
 
     def set(self, idx: int, c: int, n: int, k: float):
+        """
+        idx: ノード識別子（配列の番号とは別の一意の値）
+        c:   1コアでの実行時間
+        n:   コア割り当て数
+        k:   並列割合（アムダールの法則）
+        """
         self.idx = idx
         self.c = c
         self.n = n
@@ -53,32 +66,12 @@ class Node:
 class DAG_base:
     # ＜コンストラクタ＞
     def __init__(self):
-        '''
-        file_name : .tgffファイルの名前
-        num_of_node : DAG内のノード数
-        nodes[]: ノードの集合
-        '''
         self.nodes: list[Node] = []
-        self.critical_path: list[int] = []
-
-    def record_src_snk(self):
-        snk: list[Node] = []
-        for node in self.nodes:
-            # srcノードを求める
-            if(len(node.pre) == 0):
-                node.src = True
-            # snkノードを求める
-            if(len(node.suc) == 0):
-                node.snk = True
-                snk.append(node)
-
-        snksnk = snk.pop(-1)
-        for s in snk:
-            s.suc.append(self.nodes.index(snksnk))
-            snksnk.pre.append(self.nodes.index(s))
-            s.snk=False
 
     def search_ans(self, idx: int) -> list[int]:
+        """
+        祖先を検索
+        """
         ans: list[int] = []
         for p in self.nodes[idx].pre:
             ans.append(p)
@@ -87,6 +80,9 @@ class DAG_base:
         return ans
 
     def search_des(self, idx: int) -> list[int]:
+        """
+        子孫を検索
+        """
         des: list[int] = []
         for s in self.nodes[idx].suc:
             des.append(s)
@@ -95,12 +91,62 @@ class DAG_base:
         return des
 
     def set_n(self, n: list[int]):
+        """
+        n:   コア割り当て数
+        """
         for i in range(len(self.nodes)):
             self.nodes[i].n = n[i]
+        self.set_critical_path()
 
     def set_k(self, k: list[int]):
+        """
+        k:   並列割合（アムダールの法則）
+        """
         for i in range(len(self.nodes)):
             self.nodes[i].k = k[i]
+        self.set_critical_path()
+
+    # 最悪ケースの開始時間の設定
+    def _culc_wcft(self, i: int, start_time: int):
+        # 最悪ケースの開始時間が更新されたら
+        if self.nodes[i].wcft <= start_time + self.nodes[i].amdahl_exec_time():
+            self.nodes[i].wcft = start_time + self.nodes[i].amdahl_exec_time()
+            # 自分の後ろも更新する
+            for s in self.nodes[i].suc:
+                if s is not None:
+                    self._culc_wcft(s, start_time + self.nodes[s].amdahl_exec_time())
+
+    
+    def set_critical_path(self):
+        """
+        クリティカルパスの特定
+        """
+        self.critical_path: list[int] = []
+        # ソースとシンクの特定（DAGなら戦闘と末尾でも可）
+        for i, node in enumerate(self.nodes):
+            if node.src == True:
+                src = i
+            if node.snk == True:
+                snk = i
+
+        # 最悪ケースの開始時間の設定
+        self._culc_wcft(src, 0)
+
+        # 末尾から、snkに最悪ケースの開始時間を与えるノードを特定
+        i: int = snk
+        while(self.nodes[i].src == False):
+            self.critical_path.append(i)
+            tmp = src
+            for p in self.nodes[i].pre:
+                if self.nodes[tmp].wcft <= self.nodes[p].wcft:
+                    tmp = p
+            i = tmp
+        self.critical_path.append(src)
+
+        self.critical_path.reverse()
+
+    def print_critical_path(self):
+        print(self.critical_path)
 
     def check(self):
         print(idx_list(self.nodes[2].pre))

@@ -1,7 +1,11 @@
-from .DAG_find_critical_path import DAG_FCP, Node
+from .DAG_base import DAG_base, Node
 from .DAG_base import idx_list
 
-class DAG_CPC(DAG_FCP):
+class DAG_CPC(DAG_base):
+    """
+    論文では使っていないのでリファクタリングしていない。
+    参考資料&実験用
+    """
     # ＜コンストラクタ＞
     def __init__(self):
         '''

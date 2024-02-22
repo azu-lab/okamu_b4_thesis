@@ -88,21 +88,28 @@ class DAG_Constructer:
         file_tgff.close()
 
         nodes = DAG_Constructer._pre_suc_setted_nodes(nodes, comms)
-        nodes = DAG_Constructer._flag_src_snk(nodes)
-        nodes = DAG_Constructer._unify_src_snk(nodes)
+        nodes = DAG_Constructer._src_snk_flagged_nodes(nodes)
+        nodes = DAG_Constructer._src_snk_unified_nodes(nodes)
 
         return DAG(nodes)
 
     @staticmethod
     def create_dag_node_from_nodes(nodes: list[Node]):
+        """
+        Nodeを直接与えてDAGを生成
+        rta_cpfの中で使用
+        """
         from .DAG import DAG
-        nodes = DAG_Constructer._flag_src_snk(nodes)
-        nodes = DAG_Constructer._unify_src_snk(nodes)
+        nodes = DAG_Constructer._src_snk_flagged_nodes(nodes)
+        nodes = DAG_Constructer._src_snk_unified_nodes(nodes)
 
         return DAG(nodes)
 
     @staticmethod
     def _pre_suc_setted_nodes(nodes: list[Node], comms: list[list[int]]) -> list[Node]:
+        """
+        commとnodesから、nodesにpreとsuc（前任と後任）を設定
+        """
         for comm in comms:
             src = comm[0]
             dst = comm[1]
@@ -115,7 +122,10 @@ class DAG_Constructer:
         return nodes
 
     @staticmethod
-    def _flag_src_snk(nodes: list[Node]) -> list[Node]:
+    def _src_snk_flagged_nodes(nodes: list[Node]) -> list[Node]:
+        """
+        srcとsnk（入口と出口）のフラグを立てる
+        """
         for node in nodes:
             # srcノードを求める
             if(len(node.pre) == 0):
@@ -127,19 +137,24 @@ class DAG_Constructer:
         return nodes
 
     @staticmethod
-    def _unify_src_snk(nodes: list[Node]) -> list[Node]:
+    def _src_snk_unified_nodes(nodes: list[Node]) -> list[Node]:
+        """
+        srcとsnk（入口と出口）が複数ある場合結合
+        """
         src = [node for node in nodes if node.src]
-        srcsrc = src.pop(0)
+        # 代表入口を決定
+        supersrc = src.pop(0)
+        # 代表入口以外→代表入口のエッジを作る
         for s in src:
-            s.pre.append(nodes.index(srcsrc))
-            srcsrc.suc.append(nodes.index(s))
+            s.pre.append(nodes.index(supersrc))
+            supersrc.suc.append(nodes.index(s))
             s.src=False
 
         snk = [node for node in nodes if node.snk]
-        snksnk = snk.pop(-1)
+        supersnk = snk.pop(-1)
         for s in snk:
-            s.suc.append(nodes.index(snksnk))
-            snksnk.pre.append(nodes.index(s))
+            s.suc.append(nodes.index(supersnk))
+            supersnk.pre.append(nodes.index(s))
             s.snk=False
 
         return nodes

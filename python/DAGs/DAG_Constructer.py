@@ -9,7 +9,8 @@ class DAG_Constructer:
 
     # ＜メソッド＞
     @staticmethod
-    def create_dag_from_tgff_file(file_path) -> list[Node]:
+    def create_dag_from_tgff_file(file_path):
+        from .DAG import DAG
         """
         .tgffファイルの読み込み
         返り値はNode配列なので注意
@@ -90,14 +91,15 @@ class DAG_Constructer:
         nodes = DAG_Constructer._flag_src_snk(nodes)
         nodes = DAG_Constructer._unify_src_snk(nodes)
 
-        return nodes
+        return DAG(nodes)
 
     @staticmethod
-    def create_dag_from_nodes(nodes: list[Node]) -> list[Node]:
+    def create_dag_node_from_nodes(nodes: list[Node]):
+        from .DAG import DAG
         nodes = DAG_Constructer._flag_src_snk(nodes)
         nodes = DAG_Constructer._unify_src_snk(nodes)
 
-        return nodes
+        return DAG(nodes)
 
     @staticmethod
     def _pre_suc_setted_nodes(nodes: list[Node], comms: list[list[int]]) -> list[Node]:

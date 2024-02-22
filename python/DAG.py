@@ -1,4 +1,4 @@
-from DAGs.DAG_TGFF_load import DAG_Constructer
+from DAGs.DAG_Constructer import DAG_Constructer
 from DAGs.DAG_CPC import DAG_CPC, DAG_FCP
 from DAGs.DAG_base import Node
 
@@ -27,15 +27,16 @@ class DAG(DAG_FCP):
                 branch.append(self.nodes[p])
                 branch_idx = [self.nodes.index(b) for b in branch]
 
-                dag  = DAG()
+                nodes: list[Node] = []
                 for node in branch:
                     tmp = Node()
                     tmp.set(node.idx, node.c, node.n, node.k)
                     tmp.pre = [branch_idx.index(p) for p in node.pre if p in branch_idx]
                     tmp.suc = [branch_idx.index(s) for s in node.suc if s in branch_idx]
-                    dag.nodes.append(tmp)
+                    nodes.append(tmp)
+                dag = DAG()
+                dag.nodes = DAG_Constructer.create_dag_from_nodes(nodes)
 
-                dag.record_src_snk()
                 dag.find_critical_path()
                 priority = dag.rta_fcp(priority)
                 for node in self.nodes:

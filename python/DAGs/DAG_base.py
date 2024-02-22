@@ -64,14 +64,13 @@ class DAG_base:
     def record_src_snk(self):
         snk: list[Node] = []
         for node in self.nodes:
-            if node is not None:
-                # srcノードを求める
-                if(len(node.pre) == 0):
-                    node.src = True
-                # snkノードを求める
-                if(len(node.suc) == 0):
-                    node.snk = True
-                    snk.append(node)
+            # srcノードを求める
+            if(len(node.pre) == 0):
+                node.src = True
+            # snkノードを求める
+            if(len(node.suc) == 0):
+                node.snk = True
+                snk.append(node)
 
         snksnk = snk.pop(-1)
         for s in snk:

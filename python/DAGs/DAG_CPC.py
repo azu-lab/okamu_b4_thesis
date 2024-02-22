@@ -12,7 +12,6 @@ class DAG_CPC(DAG_FCP):
         self.provider=[]
         self.consumer_f=[]
         self.consumer_g=[]
-        super(DAG_CPC, self).__init__()
 
     def construct_provider(self):
         idx = 0

@@ -1,17 +1,20 @@
-from DAGs.DAG_TGFF_load import DAG_TGFF
-from DAGs.DAG_CPC import DAG_CPC
+from DAGs.DAG_TGFF_load import DAG_Constructer
+from DAGs.DAG_CPC import DAG_CPC, DAG_FCP
 from DAGs.DAG_base import Node
 
-class DAG(DAG_TGFF, DAG_CPC):
+class DAG(DAG_FCP):
     # ＜コンストラクタ＞
-    def __init__(self):
+
+    def __init__(self, file_name: str | None = None):
         '''
         file_name : .tgffファイルの名前
-        num_of_node : DAG内のノード数
         nodes[]: ノードの集合
         '''
-
-        super(DAG, self).__init__()
+        if file_name:
+            self.nodes: list[Node] = DAG_Constructer.create_dag_from_tgff_file(file_name)
+        else:
+            self.nodes: list[Node] = []
+        self.critical_path: list[int] = []
 
     def rta_fcp(self, p):
         priority = p
@@ -20,26 +23,25 @@ class DAG(DAG_TGFF, DAG_CPC):
             priority-=1
         for cp in self.critical_path:
             for p in sorted(self.nodes[cp].pre, key=lambda u: self.nodes[u].wcft, reverse=True):
-                branch = [ a for a in self.search_ans(p) if a not in self.critical_path ]
-                branch.append(p)
+                branch: list[Node] = [self.nodes[a] for a in self.search_ans(p) if a not in self.critical_path]
+                branch.append(self.nodes[p])
+                branch_idx = [self.nodes.index(b) for b in branch]
 
                 dag  = DAG()
-                for n in self.nodes:
-                    if n is not None and n.idx in branch:
-                        tmp = Node()
-                        tmp.set(n.idx, n.c, n.n, n.k)
-                        tmp.pre = [p for p in n.pre if p in branch]
-                        tmp.suc = [s for s in n.suc if s in branch]
-                        dag.nodes.append(tmp)
-                    else:
-                        dag.nodes.append(None)
+                for node in branch:
+                    tmp = Node()
+                    tmp.set(node.idx, node.c, node.n, node.k)
+                    tmp.pre = [branch_idx.index(p) for p in node.pre if p in branch_idx]
+                    tmp.suc = [branch_idx.index(s) for s in node.suc if s in branch_idx]
+                    dag.nodes.append(tmp)
 
                 dag.record_src_snk()
                 dag.find_critical_path()
                 priority = dag.rta_fcp(priority)
-                for i in dag.nodes:
-                    if i is not None and self.nodes[i.idx].p < i.p:
-                        self.nodes[i.idx].p = i.p
+                for node in self.nodes:
+                    for node2 in dag.nodes:
+                        if node.idx == node2.idx and node.p < node2.p:
+                            node.p = node2.p
                 """self.nodes[p].p=priority
                 for ans in self.search_ans(p):
                     if self.nodes[ans].p < priority:

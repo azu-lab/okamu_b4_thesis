@@ -15,31 +15,31 @@ class Node:
         snk[i]=1 : niはsnkノード. snk[i]=0 : niはsnkノードではない
         """
 
-        self.idx=0
-        self.c=0
-        self.n=1
-        self.p=0
-        self.k=1.0
+        self.idx: int = 0
+        self.c: int = 0
+        self.n: int = 1
+        self.p: int = 0
+        self.k: float = 1.0
 
-        self.comm=[]
-        self.pre=[]
-        self.suc=[]
-        self.src=False
-        self.snk=False
+        self.comm: list[int] = []
+        self.pre: list[int] = []
+        self.suc: list[int] = []
+        self.src: bool = False
+        self.snk: bool = False
 
-        self.cc_idx=-1
-        self.core_idx=[]
-        self.time=-1
-        self.fn_flag=False
-        self.st_flag=False
+        self.cc_idx: int = -1
+        self.core_idx: list[int] = []
+        self.time: int = -1
+        self.fn_flag: bool = False
+        self.st_flag: bool = False
 
         # クリティカルパス探索で使用
-        self.wcft=0
+        self.wcft: int = 0
 
-    def sc(self):
+    def sc(self) -> int:
         return ceil(((1-self.k)+self.k/self.n)*self.c)
 
-    def sc_n(self, n: int):
+    def sc_n(self, n: int) -> int:
         return ceil(((1-self.k)+self.k/n)*self.c)
 
     def set(self, idx: int, c: int, n: int, k: float):
@@ -58,60 +58,48 @@ class DAG_base:
         num_of_node : DAG内のノード数
         nodes[]: ノードの集合
         '''
-        self.nodes = []
-        
-
-    # ＜メソッド＞
-    # .tgffファイルの読み込み
-    # def read_file_tgff(self): DAG_TGFF_load.
-
-    def record_pre_suc(self):
-        for begin, node in enumerate(self.nodes):
-            # エッジを検出し, preとsucを記録
-            for end, comm in enumerate(node.comm):
-                if comm != 0:
-                    node.suc.append(end)
-                    self.nodes[end].pre.append(begin)
+        self.nodes: list[Node] = []
+        self.critical_path: list[int] = []
 
     def record_src_snk(self):
-        snk = []
+        snk: list[Node] = []
         for node in self.nodes:
             if node is not None:
                 # srcノードを求める
                 if(len(node.pre) == 0):
-                        node.src = True
+                    node.src = True
                 # snkノードを求める
                 if(len(node.suc) == 0):
-                        node.snk = True
-                        snk.append(node)
+                    node.snk = True
+                    snk.append(node)
 
         snksnk = snk.pop(-1)
         for s in snk:
-            s.suc.append(snksnk.idx)
-            snksnk.pre.append(s.idx)
+            s.suc.append(self.nodes.index(snksnk))
+            snksnk.pre.append(self.nodes.index(s))
             s.snk=False
 
-    def search_ans(self, idx):
-        ans = []
+    def search_ans(self, idx: int) -> list[int]:
+        ans: list[int] = []
         for p in self.nodes[idx].pre:
             ans.append(p)
             ans.extend(self.search_ans(p))
 
         return ans
 
-    def search_des(self, nodes):
-        des = []
-        for node in nodes:
-            des.append(node)
-            des.extend(self.search_des(node.suc))
+    def search_des(self, idx: int) -> list[int]:
+        des: list[int] = []
+        for s in self.nodes[idx].suc:
+            des.append(s)
+            des.extend(self.search_des(s))
 
         return des
 
-    def set_n(self, n):
+    def set_n(self, n: list[int]):
         for i in range(len(self.nodes)):
             self.nodes[i].n = n[i]
 
-    def set_k(self, k):
+    def set_k(self, k: list[int]):
         for i in range(len(self.nodes)):
             self.nodes[i].k = k[i]
 

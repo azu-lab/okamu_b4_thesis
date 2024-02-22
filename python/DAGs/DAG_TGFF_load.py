@@ -1,21 +1,20 @@
-from .DAG_base import DAG_base, Node
+from .DAG_base import Node
 
 
 # DAG
-class DAG_TGFF(DAG_base):
+class DAG_Constructer:
     # ＜コンストラクタ＞
     def __init__(self):
-        '''
-        num_of_node : DAG内のノード数
-        nodes[]: ノードの集合
-        '''
-
-        super(DAG_TGFF, self).__init__()
-        
+        pass
 
     # ＜メソッド＞
-    # .tgffファイルの読み込み
-    def read_file_tgff(self, file_path):
+    @staticmethod
+    def create_dag_from_tgff_file(file_path) -> list[Node]:
+        """
+        .tgffファイルの読み込み
+        返り値はNode配列なので注意
+        先輩から引き継いだもののためリファクタリングはしていない、新しく研究を行う場合、RD-Genを使うこと推奨
+        """
         file_tgff = open(file_path, "r")
         
         type_cost = []  # TYPEと実行時間の対応関係の配列
@@ -49,6 +48,8 @@ class DAG_TGFF(DAG_base):
         # TASKの情報の取得
         file_tgff = open(file_path, "r")
 
+        nodes: list[Node] = []
+
         # 実行時間を取得
         for line in file_tgff:
             if(line == "\n"):
@@ -58,17 +59,18 @@ class DAG_TGFF(DAG_base):
             if(line_list[0] == 'TASK'):
                 node = Node()
                 node.c = type_cost[int(line_list[3])] #line_list[3]がTYPEなので、それに対応する実行時間を格納
-                node.idx = len(self.nodes)
-                self.nodes.append(node)
+                node.idx = len(nodes)
+                nodes.append(node)
 
-        self.num_of_node = len(self.nodes)  # タスク数を取得
+        # num_of_node = len(nodes)  # タスク数を取得
 
         file_tgff.close()
         file_tgff = open(file_path, "r")
 
+        comms: list[list[int]] = []
         # エッジの通信時間を取得
-        for node in self.nodes:
-            node.comm = [0] * self.num_of_node
+        # for node in nodes:
+        #     node.comm = [0] * num_of_node
 
         for line in file_tgff:
             if(line == "\n"):
@@ -78,7 +80,24 @@ class DAG_TGFF(DAG_base):
             if(line_list[0] == 'ARC'):
                 from_t = int(line_list[3][3:])  # エッジを出すタスク
                 to_t = int(line_list[5][3:])  # エッジの先のタスク
-                comm_cost = int(type_cost[int(line_list[7])])  # TYPEに書かれている時間を通信時間とする
-                self.nodes[from_t].comm[to_t] = comm_cost
+                # comm_cost = int(type_cost[int(line_list[7])])  # TYPEに書かれている時間を通信時間とする
+                # nodes[from_t].comm[to_t] = comm_cost
+                comms.append([from_t, to_t])
 
         file_tgff.close()
+
+        nodes = DAG_Constructer._pre_suc_setted_nodes(nodes, comms)
+
+        return nodes
+
+    @staticmethod
+    def _pre_suc_setted_nodes(nodes: list[Node], comms: list[list[int]]) -> list[Node]:
+        for comm in comms:
+            src = comm[0]
+            dst = comm[1]
+            for i, node in enumerate(nodes):
+                if i == src:
+                    node.suc.append(dst)
+                if i == dst:
+                    node.pre.append(src)
+        return nodes

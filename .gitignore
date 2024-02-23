@@ -131,3 +131,5 @@ dmypy.json
 DAG/
 DATA/
 Image/
+.ipynb
+.code-workspace

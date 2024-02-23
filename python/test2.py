@@ -65,38 +65,3 @@ def test(file_name: str, method: str, n: list[int] | None = None, k_param: float
             makespan = node.start_time+node.amdahl_exec_time()
 
     return makespan
-
-
-
-
-
-"""
-nodes = []
-node = Node() 
-node.set(0, 320, 16, [], False) 
-nodes.append(node)
-node = Node() 
-node.set(1, 180, 12, [0], False) 
-nodes.append(node)
-node = Node() 
-node.set(2, 320, 16, [0], False) 
-nodes.append(node)
-node = Node() 
-node.set(3, 160, 8, [0], False) 
-nodes.append(node)
-node = Node() 
-node.set(4, 60, 4, [1], False) 
-nodes.append(node)
-node = Node() 
-node.set(5, 320, 12, [2, 3], False) 
-nodes.append(node)
-node = Node() 
-node.set(6, 160, 4, [4], False) 
-nodes.append(node)
-node = Node() 
-node.set(7, 120, 12, [5], False) 
-nodes.append(node)
-node = Node() 
-node.set(8, 240, 8, [6, 7], True) 
-nodes.append(node)
-"""

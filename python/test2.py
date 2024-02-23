@@ -1,7 +1,7 @@
 from .Al_CCs import Al_CCs, Method
 from .DAGs.DAG_base import Node
-from .DAGs.DAG_Constructer import DAG_Constructer
-from .JSONexporter import JSONexport
+from .DAG_Constructer import DAG_Constructer
+from .evaluate.JSONexporter import JSONexport
 import time
 
 def work_load(nodes: list[Node]):

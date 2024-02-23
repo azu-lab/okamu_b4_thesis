@@ -1,5 +1,5 @@
 from .DAG_Constructer import DAG_Constructer
-from .DAG_base import Node, DAG_base
+from .DAGs.DAG_base import Node, DAG_base
 
 class DAG(DAG_base):
     # ＜コンストラクタ＞

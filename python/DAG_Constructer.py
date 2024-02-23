@@ -1,4 +1,4 @@
-from .DAG_base import Node
+from .DAGs.DAG_base import Node
 
 
 # DAG

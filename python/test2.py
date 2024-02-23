@@ -14,7 +14,6 @@ def work_load(nodes: list[Node]):
             node.start_time = makespan
             node.start_time -= node.amdahl_exec_time()
 
-
 def test(file_name: str, method: str, n: list[int] | None = None, k_param: float | None = None):
 
     # start = time.perf_counter()

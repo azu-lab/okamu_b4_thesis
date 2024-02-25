@@ -10,12 +10,16 @@ class Method(Enum):
     Dec_method = 2
     Basic = 3
 
+from sys import maxsize as MAXSIZE
+CLUSTER_LEN: int = 16
+CLUSTER_NUM: int = 5
+
 def Al_CCs(dags: list[Node], method=Method.Wait_suff):
     # initialize
     wait_queue: list[Node] = []
     executing_nodes: list[Node] = []
-    vacant_core: list[int] = [ 16 for i in range(5) ]
-    cores: list[list[int]] = [ [ i for i in range(16) ] for i in range(5) ]
+    vacant_core: list[int] = [ CLUSTER_LEN for i in range(CLUSTER_NUM) ]
+    cores: list[list[int]] = [ [ i for i in range(CLUSTER_LEN) ] for i in range(CLUSTER_NUM) ]
 
     time: int = 0
 
@@ -30,9 +34,9 @@ def Al_CCs(dags: list[Node], method=Method.Wait_suff):
             v_h = wait_queue.pop(0)
             #print([99 if i < v_h.n else i for i in vacant_core])
             if method is not Method.Basic:
-                cc_idx = argmin([99 if core_num < v_h.n else core_num for core_num in vacant_core])
+                cc_idx = argmin([MAXSIZE if core_num < v_h.n else core_num for core_num in vacant_core])
             else:
-                cc_idx = argmin([99 if core_num != 16 else core_num for core_num in vacant_core])
+                cc_idx = argmin([MAXSIZE if core_num != CLUSTER_LEN else core_num for core_num in vacant_core])
             if vacant_core[cc_idx] >= v_h.n:
                 v_h.cc_idx = cc_idx
                 v_h.start_time = time

@@ -237,7 +237,7 @@ class Basic(MethodBase):
             # 待ち行列から最優先を取得
             node_priory = wait_queue.pop(0)
             # ノードが割り当てられていないクラスタを取得
-            cc_idx = argmin([MAXSIZE if len(core_map) != MethodBase.CLUSTER_LEN else len(core_row) for core_row in core_map])
+            cc_idx = argmin([MAXSIZE if len(core_row) != MethodBase.CLUSTER_LEN else len(core_row) for core_row in core_map])
 
             # コアが足りる場合
             if len(core_map[cc_idx]) >= node_priory.n:

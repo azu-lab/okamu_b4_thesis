@@ -1,25 +1,32 @@
-from numpy import argmax
-from numpy import argmin
-from math import ceil
+from numpy import argmax, argmin
 from .DAGs.DAG_base import Node
-from enum import Enum
 from abc import abstractclassmethod
 
 from sys import maxsize as MAXSIZE
 
 class MethodBase:
+    """
+    共通の手法・スケジューリングなど
+    """
+    # 1クラスタに含まれるコア数
     CLUSTER_LEN: int = 16
+    # プロセッサに含まれるクラスタ数
     CLUSTER_NUM: int = 5
 
     @classmethod
     def allocate_ccs(cls, dags: list[Node]):
-        # initialize
+        # 初期化
+        # 待機キュー
         wait_queue: list[Node] = []
+        # 実行中ノードリスト
         executing_nodes: list[Node] = []
+        # 各クラスタに割り当てられているノード数
         core_map: list[list[int]] = [ [ i for i in range(MethodBase.CLUSTER_LEN) ] for i in range(MethodBase.CLUSTER_NUM) ]
 
+        # 現在時刻
         time: int = 0
 
+        # 入口ノードを実行開始
         dags[0].start_time = 0
         dags[0].st_flag = True
         wait_queue.append(dags[0])
@@ -74,6 +81,9 @@ class MethodBase:
 
 
 class WaitSufficient(MethodBase):
+    """
+    十分なコアが空いているクラスタができるまで待つ
+    """
     CLUSTER_LEN: int = 16
     CLUSTER_NUM: int = 5
 
@@ -105,6 +115,9 @@ class WaitSufficient(MethodBase):
 
 
 class AllocateAvailable(MethodBase):
+    """
+    今最もコアが空いているクラスタに割り当てる（割り当て数を減らす）
+    """
     CLUSTER_LEN: int = 16
     CLUSTER_NUM: int = 5
 
@@ -148,6 +161,10 @@ class AllocateAvailable(MethodBase):
 
 
 class DecisionMethod(MethodBase):
+    """
+    今最も空いているクラスタに対し、割り当てられた各タスクが完了するまで待つのと
+    今すぐ割り当てるのでどちらが早くタスクを完了するかを比較する
+    """
     CLUSTER_LEN: int = 16
     CLUSTER_NUM: int = 5
 
@@ -208,6 +225,9 @@ class DecisionMethod(MethodBase):
 
 
 class Basic(MethodBase):
+    """
+    クラスタが全部空いていれば割り当て、そうでなければ待つ（WaitSufficientの劣化）
+    """
     CLUSTER_LEN: int = 16
     CLUSTER_NUM: int = 5
 

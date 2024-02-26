@@ -5,13 +5,13 @@
   - TGFFのファイル（.tgff）が格納されています
   - Edgeは出エッジ数pを3~6に変化させたもの
   - Nodeはノード数を20~100に変化させたもの
-- DATA
+- DATA/
   - 計算したmakespanなどのデータを保存したyamlが格納されます
   - ディレクトリは変更させたパラメータです
-- Image
+- Image/
   - 生成した画像が格納されます
   - ディレクトリは変更させたパラメータです
-- python
+- python/
   - 実装に用いたプログラムファイルを格納しています
   - 詳しい内容は、python/readme.mdを参照してください
 - test_rta_cpf_priority.ipynb
@@ -20,3 +20,6 @@
   - xxxを変更して評価を行います
   - Run Allで、必要なグラフが生成されます
   - test_varying_node.ipynbには、論文では使っていない手法の有利比較とspeedup計算が入っています
+
+## 提案手法について
+python/README.md に簡単なまとめを書いています

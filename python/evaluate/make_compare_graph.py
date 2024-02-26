@@ -13,7 +13,6 @@ def make_compare_graph(file_name: str):
     grapg_name: str = data_dict['name']
 
     data = DataFrame({method: [] for method in methods + ['Equivalence']})
-    #colors = ['#40ff40', '#40c0ff', '#ffc0c0', '#c0ffff']
 
     for x in xaxis:
         values: list[list[int]] = []
@@ -28,8 +27,7 @@ def make_compare_graph(file_name: str):
             min_idx: int = argmin(value_row)
 
             if len([v for v in value_row if v == value_row[min_idx]]) != 1:
-                if 'Equivalence' in methods:
-                    eva[-1] += 1
+                eva[-1] += 1
             else:
                 eva[min_idx] += 1
 

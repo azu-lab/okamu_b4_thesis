@@ -1,26 +1,30 @@
-from numpy import argmax
-from numpy import argmin
-from math import ceil
+from numpy import argmax, argmin
 from .DAGs.DAG_base import Node
-from enum import Enum
 from abc import abstractclassmethod
 
 from sys import maxsize as MAXSIZE
 
 class MethodBase:
+    # 1クラスタに含まれるコア数
     CLUSTER_LEN: int = 16
+    # プロセッサに含まれるクラスタ数
     CLUSTER_NUM: int = 5
 
     @classmethod
     def allocate_ccs(cls, dags: list[Node]):
-        # initialize
+        # 初期化
+        # 待機キュー
         wait_queue: list[Node] = []
+        # 実行中ノードリスト
         executing_nodes: list[Node] = []
         vacant_core: list[int] = [ MethodBase.CLUSTER_LEN for i in range(MethodBase.CLUSTER_NUM) ]
-        cores: list[list[int]] = [ [ i for i in range(MethodBase.CLUSTER_LEN) ] for i in range(MethodBase.CLUSTER_NUM) ]
+        # 各クラスタに割り当てられているノード数
+        core_map: list[list[int]] = [ [ i for i in range(MethodBase.CLUSTER_LEN) ] for i in range(MethodBase.CLUSTER_NUM) ]
 
+        # 現在時刻
         time: int = 0
 
+        # 入口ノードを実行開始
         dags[0].start_time = 0
         dags[0].st_flag = True
         wait_queue.append(dags[0])
@@ -28,7 +32,7 @@ class MethodBase:
         while True:
             # タスクをコア（クラスタ）に割り当て、或いは割り当てずにスルー
             # 具体的な処理は各手法ごとのクラスのallicate関数に記載
-            wait_queue, vacant_core, cores, executing_nodes, time = cls.allocate(wait_queue, vacant_core, cores, executing_nodes, time)
+            wait_queue, vacant_core, core_map, executing_nodes, time = cls.allocate(wait_queue, vacant_core, core_map, executing_nodes, time)
 
             # simulation
             # 早く終わる順に並び変え
@@ -40,7 +44,7 @@ class MethodBase:
 
                 # コア状況を更新（終了した分を戻す）
                 vacant_core[earliest.cc_idx] += earliest.n
-                cores[earliest.cc_idx].extend(earliest.core_idx)
+                core_map[earliest.cc_idx].extend(earliest.core_idx)
 
                 # 時刻の更新
                 time = earliest.start_time + earliest.amdahl_exec_time()
@@ -71,7 +75,7 @@ class MethodBase:
                 break
 
     @abstractclassmethod
-    def allocate(cls, wait_queue: list[Node], vacant_core: list[int], cores: list[list[int]], executing_nodes: list[Node], time: int) -> tuple[list[Node], list[int], list[list[int]], list[Node], int]:
+    def allocate(cls, wait_queue: list[Node], vacant_core: list[int], core_map: list[list[int]], executing_nodes: list[Node], time: int) -> tuple[list[Node], list[int], list[list[int]], list[Node], int]:
         pass
 
 
@@ -80,7 +84,7 @@ class WaitSufficient(MethodBase):
     CLUSTER_NUM: int = 5
 
     @classmethod
-    def allocate(cls, wait_queue: list[Node], vacant_core: list[int], cores: list[list[int]], executing_nodes: list[Node], time: int) -> tuple[list[Node], list[int], list[list[int]], list[Node], int]:
+    def allocate(cls, wait_queue: list[Node], vacant_core: list[int], core_map: list[list[int]], executing_nodes: list[Node], time: int) -> tuple[list[Node], list[int], list[list[int]], list[Node], int]:
         while len(wait_queue) > 0:
             # 待ち行列から最優先を取得
             node_priory = wait_queue.pop(0)
@@ -92,7 +96,7 @@ class WaitSufficient(MethodBase):
                 # タスクに、クラスタ割り当て→コア割り当て→開始時間設定
                 node_priory.cc_idx = cc_idx
                 for _ in range(node_priory.n):
-                    node_priory.core_idx.append(cores[cc_idx].pop(0))
+                    node_priory.core_idx.append(core_map[cc_idx].pop(0))
                 node_priory.start_time = time
                 # 余りコア数を減らす
                 vacant_core[cc_idx] -= node_priory.n
@@ -105,7 +109,7 @@ class WaitSufficient(MethodBase):
                 wait_queue.insert(0, node_priory)
                 break
 
-        return wait_queue, vacant_core, cores, executing_nodes, time
+        return wait_queue, vacant_core, core_map, executing_nodes, time
 
 
 class AllocateAvailable(MethodBase):
@@ -113,7 +117,7 @@ class AllocateAvailable(MethodBase):
     CLUSTER_NUM: int = 5
 
     @classmethod
-    def allocate(cls, wait_queue: list[Node], vacant_core: list[int], cores: list[list[int]], executing_nodes: list[Node], time: int) -> tuple[list[Node], list[int], list[list[int]], list[Node], int]:
+    def allocate(cls, wait_queue: list[Node], vacant_core: list[int], core_map: list[list[int]], executing_nodes: list[Node], time: int) -> tuple[list[Node], list[int], list[list[int]], list[Node], int]:
         while len(wait_queue) > 0:
             # 待ち行列から最優先を取得
             node_priory = wait_queue.pop(0)
@@ -125,7 +129,7 @@ class AllocateAvailable(MethodBase):
                 # タスクに、クラスタ割り当て→コア割り当て→開始時間設定
                 node_priory.cc_idx = cc_idx
                 for _ in range(node_priory.n):
-                    node_priory.core_idx.append(cores[cc_idx].pop(0))
+                    node_priory.core_idx.append(core_map[cc_idx].pop(0))
                 node_priory.start_time = time
                 # 余りコア数を減らす
                 vacant_core[cc_idx] -= node_priory.n
@@ -141,7 +145,7 @@ class AllocateAvailable(MethodBase):
                     node_priory.cc_idx = cc_idx
                     node_priory.n = vacant_core[cc_idx]
                     for _ in range(node_priory.n):
-                        node_priory.core_idx.append(cores[cc_idx].pop(0))
+                        node_priory.core_idx.append(core_map[cc_idx].pop(0))
                     node_priory.start_time = time
                     # 余りコア数を減らす
                     vacant_core[cc_idx] -= node_priory.n
@@ -152,7 +156,7 @@ class AllocateAvailable(MethodBase):
                     wait_queue.insert(0, node_priory)
                     break
 
-        return wait_queue, vacant_core, cores, executing_nodes, time
+        return wait_queue, vacant_core, core_map, executing_nodes, time
 
 
 class DecisionMethod(MethodBase):
@@ -160,7 +164,7 @@ class DecisionMethod(MethodBase):
     CLUSTER_NUM: int = 5
 
     @classmethod
-    def allocate(cls, wait_queue: list[Node], vacant_core: list[int], cores: list[list[int]], executing_nodes: list[Node], time: int) -> tuple[list[Node], list[int], list[list[int]], list[Node], int]:
+    def allocate(cls, wait_queue: list[Node], vacant_core: list[int], core_map: list[list[int]], executing_nodes: list[Node], time: int) -> tuple[list[Node], list[int], list[list[int]], list[Node], int]:
         while len(wait_queue) > 0:
             # 待ち行列から最優先を取得
             node_priory = wait_queue.pop(0)
@@ -171,7 +175,7 @@ class DecisionMethod(MethodBase):
                 # タスクに、クラスタ割り当て→コア割り当て→開始時間設定
                 node_priory.cc_idx = cc_idx
                 for _ in range(node_priory.n):
-                    node_priory.core_idx.append(cores[cc_idx].pop(0))
+                    node_priory.core_idx.append(core_map[cc_idx].pop(0))
                 node_priory.start_time = time
                 # 余りコア数を減らす
                 vacant_core[cc_idx] -= node_priory.n
@@ -204,7 +208,7 @@ class DecisionMethod(MethodBase):
                     node_priory.cc_idx = cc_idx
                     node_priory.n = vacant_core[cc_idx]
                     for _ in range(node_priory.n):
-                        node_priory.core_idx.append(cores[cc_idx].pop(0))
+                        node_priory.core_idx.append(core_map[cc_idx].pop(0))
                     node_priory.start_time = time
                     # 余りコア数を減らす
                     vacant_core[cc_idx] -= node_priory.n
@@ -216,7 +220,7 @@ class DecisionMethod(MethodBase):
                     wait_queue.insert(0, node_priory)
                     break
 
-        return wait_queue, vacant_core, cores, executing_nodes, time
+        return wait_queue, vacant_core, core_map, executing_nodes, time
 
 
 class Basic(MethodBase):
@@ -224,7 +228,7 @@ class Basic(MethodBase):
     CLUSTER_NUM: int = 5
 
     @classmethod
-    def allocate(cls, wait_queue: list[Node], vacant_core: list[int], cores: list[list[int]], executing_nodes: list[Node], time: int) -> tuple[list[Node], list[int], list[list[int]], list[Node], int]:
+    def allocate(cls, wait_queue: list[Node], vacant_core: list[int], core_map: list[list[int]], executing_nodes: list[Node], time: int) -> tuple[list[Node], list[int], list[list[int]], list[Node], int]:
         while len(wait_queue) > 0:
             # 待ち行列から最優先を取得
             node_priory = wait_queue.pop(0)
@@ -236,7 +240,7 @@ class Basic(MethodBase):
                 # タスクに、クラスタ割り当て→コア割り当て→開始時間設定
                 node_priory.cc_idx = cc_idx
                 for _ in range(node_priory.n):
-                    node_priory.core_idx.append(cores[cc_idx].pop(0))
+                    node_priory.core_idx.append(core_map[cc_idx].pop(0))
                 node_priory.start_time = time
                 # 余りコア数を減らす
                 vacant_core[cc_idx] -= node_priory.n
@@ -249,4 +253,4 @@ class Basic(MethodBase):
                 wait_queue.insert(0, node_priory)
                 break
 
-        return wait_queue, vacant_core, cores, executing_nodes, time
+        return wait_queue, vacant_core, core_map, executing_nodes, time

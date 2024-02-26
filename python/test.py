@@ -1,6 +1,7 @@
-from .Al_CCs import Al_CCs, Method
+from .proposed_method import WaitSufficient, AllocateAvailable, DecisionMethod, Basic
 from .DAGs.DAG_base import Node
 from .DAG_Constructer import DAG_Constructer
+import sys
 from .evaluate.JSONexporter import JSONexport
 import time
 
@@ -37,15 +38,18 @@ def test(file_name: str, method: str, n: list[int] | None = None, k_param: float
     dag.rta_fcp(65536)
 
     if method == 'Wait-sufficient':
-        Al_CCs(dag.nodes, Method.Wait_suff)
+        WaitSufficient.allocate_ccs(dag.nodes)
     elif method == 'Decision-method':
-        Al_CCs(dag.nodes, Method.Dec_method)
+        DecisionMethod.allocate_ccs(dag.nodes)
     elif method == 'Work-load':
         work_load(dag.nodes)
     elif method == 'Basic':
-        Al_CCs(dag.nodes, Method.Basic)
+        Basic.allocate_ccs(dag.nodes)
+    elif method == 'Allocate-available' or method == 'rta-cpf-eo':
+        AllocateAvailable.allocate_ccs(dag.nodes)
     else:
-        Al_CCs(dag.nodes, Method.Al_avail)
+        print('invalid-method')
+        sys.exit()
 
     # print(time.perf_counter() - start)
 

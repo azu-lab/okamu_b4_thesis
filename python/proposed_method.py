@@ -5,6 +5,9 @@ from abc import abstractclassmethod
 from sys import maxsize as MAXSIZE
 
 class MethodBase:
+    """
+    共通の手法・スケジューリングなど
+    """
     # 1クラスタに含まれるコア数
     CLUSTER_LEN: int = 16
     # プロセッサに含まれるクラスタ数
@@ -80,6 +83,9 @@ class MethodBase:
 
 
 class WaitSufficient(MethodBase):
+    """
+    十分なコアが空いているクラスタができるまで待つ
+    """
     CLUSTER_LEN: int = 16
     CLUSTER_NUM: int = 5
 
@@ -113,6 +119,9 @@ class WaitSufficient(MethodBase):
 
 
 class AllocateAvailable(MethodBase):
+    """
+    今最もコアが空いているクラスタに割り当てる（割り当て数を減らす）
+    """
     CLUSTER_LEN: int = 16
     CLUSTER_NUM: int = 5
 
@@ -160,6 +169,10 @@ class AllocateAvailable(MethodBase):
 
 
 class DecisionMethod(MethodBase):
+    """
+    今最も空いているクラスタに対し、割り当てられた各タスクが完了するまで待つのと
+    今すぐ割り当てるのでどちらが早くタスクを完了するかを比較する
+    """
     CLUSTER_LEN: int = 16
     CLUSTER_NUM: int = 5
 
@@ -224,6 +237,9 @@ class DecisionMethod(MethodBase):
 
 
 class Basic(MethodBase):
+    """
+    クラスタが全部空いていれば割り当て、そうでなければ待つ（WaitSufficientの劣化）
+    """
     CLUSTER_LEN: int = 16
     CLUSTER_NUM: int = 5
 

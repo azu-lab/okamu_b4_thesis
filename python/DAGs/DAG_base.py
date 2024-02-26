@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-
-import pprint
 from math import ceil
 
 class Node:

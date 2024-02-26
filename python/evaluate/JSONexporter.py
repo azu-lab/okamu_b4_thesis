@@ -1,5 +1,4 @@
 from ..DAGs.DAG_base import DAG_base
-from ..DAGs.DAG_base import Node
 import json
 from math import ceil
 

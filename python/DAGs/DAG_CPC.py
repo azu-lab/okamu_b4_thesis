@@ -1,4 +1,4 @@
-from .DAG_base import DAG_base, Node
+from .DAG_base import DAG_base
 from .DAG_base import idx_list
 
 class DAG_CPC(DAG_base):

@@ -27,3 +27,4 @@ python/README.md に簡単なまとめを書いています
 ## refactored について
 リファクタリングを行った結果、読みやすくなった代わりに論文の疑似アルゴリズムと齟齬が生じています
 mainブランチに論文と仕様が一致するソースコード、refactoredブランチにリファクタリング後のソースコードを置いてあります
+NASにはpython/version/proposed_method.refactored.py としてリファクタリング後ソースコードを置いてあります
